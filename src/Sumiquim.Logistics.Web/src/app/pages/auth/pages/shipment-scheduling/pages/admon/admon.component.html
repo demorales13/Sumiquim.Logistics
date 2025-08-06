@@ -9,7 +9,7 @@
 </div>
 
 <div class="body">
-  <ng-container *ngFor="let line of ShippingLines | orderBy:'carrierCompany': true">
+  <ng-container *ngFor="let line of ShippingLines | multiFieldOrderBy: ['carrierCompany', 'client', 'item', 'location']: true">
     <app-shipping-line-admon [shippingLine]="line" 
       (editClicked)="onShippingEditClick($event)"
       (deleteClicked)="onShippingDeleteClick($event)"

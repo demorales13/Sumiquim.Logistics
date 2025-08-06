@@ -3,7 +3,7 @@
 </div>
 
 <div class="body">
-  <ng-container *ngFor="let line of shippingLines | orderBy:'carrierCompany': true">
+  <ng-container *ngFor="let line of shippingLines | multiFieldOrderBy: ['carrierCompany', 'client', 'item', 'location']: true">
     <app-shipping-line [shippingLine]="line"></app-shipping-line>
   </ng-container>
 </div>
