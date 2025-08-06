@@ -1,0 +1,11 @@
+<div class="header">
+  <h3>Rutas con información pendiente por diligenciar</h3>
+</div>
+
+<div class="body">
+  <ng-container *ngFor="let line of ShippingLines">
+    <app-shipping-line-admon [shippingLine]="line" 
+      (editClicked)="onShippingEditClick($event)"></app-shipping-line-admon>
+  </ng-container>
+</div>
+

@@ -1,0 +1,76 @@
+@import "colors";
+
+.radio {
+  display: block;
+  position: relative;
+  text-indent: 30px;
+  margin: 8px 0;
+  padding: 0 20px 0 0;
+
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &_input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+    &:checked {
+      &~.radio_checkmark {
+        background-color: $primary;
+
+        &:after {
+          display: block;
+          background-color: #fff;
+          left: 6px;
+          top: 6px;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+  &_checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: #EEE;
+
+    &:after{
+      content:"";
+      position: absolute;
+      display: none;
+    }
+  }
+
+  &_m_disabled {
+    color: rgba(0,0,0,0.38);
+  }
+
+  &:hover {
+    .radio_checkmark {
+      background-color: #ccc;
+    }
+
+    .radio_input:checked ~ .radio_checkmark {
+      background-color: $primary-dark;
+    }
+  }
+
+}
+
+:host-context(.form-field_m_error){
+  .radio_checkmark {
+    border: 1px solid $error;
+  }
+}

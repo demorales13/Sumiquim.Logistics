@@ -1,0 +1,111 @@
+<div class="row">
+  <div class="col">
+    <form [formGroup]="usefulLifeform"
+      (submit)="onUsefulLifeSubmit()"
+      (keyup.enter)="onUsefulLifeSubmit()"
+      novalidate
+      autocomplete="off">
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">
+            Vida Util
+          </h3>
+        </div>
+
+        <div class="card-body">
+          <app-form-field
+            label="Fecha de Fabricación"
+            [required]="true"
+            [control]="usefulLifeform.controls['manufacturingDate']"
+            [isInline]="false">
+            <app-date
+              formControlName="manufacturingDate"
+              placeholder="Seleccione la fecha de fabricación">
+            </app-date>
+          </app-form-field>
+
+          <app-form-field
+            label="Fecha de Vencimiento"
+            [required]="true"
+            [control]="usefulLifeform.controls['expirationDate']"
+            [isInline]="false">
+            <app-date
+              formControlName="expirationDate"
+              placeholder="Seleccione la fecha de vencimiento">
+            </app-date>
+          </app-form-field>
+
+          <app-form-field
+            label="Fecha Vida Útil"
+            [required]="true"
+            [control]="usefulLifeform.controls['receiptDate']"
+            [isInline]="false">
+            <app-date
+              formControlName="receiptDate"
+              placeholder="Seleccione la fecha de vida útil">
+            </app-date>
+          </app-form-field>
+        </div>
+
+        <div class="card-footer">
+          <app-button type="submit">Calcular</app-button>
+        </div>
+      </div>
+    </form>
+
+    <div class="alert alert-success" role="alert"
+      *ngIf="usefulLifeResult">
+      <h2 class="alert-heading">{{ usefulLifeResult?.life | number: '1.0-2' }}%</h2>
+      <p>Quedan {{usefulLifeResult?.useLife}} días ({{usefulLifeResult?.useMonthLife | monthsCount}}) de los {{usefulLifeResult?.totalLife}} días de la vida util del producto.</p>
+    </div>
+  </div>
+
+  <div class="col">
+    <form [formGroup]="poundsform"
+      (submit)="onPoundsSubmit()"
+      (keyup.enter)="onPoundsSubmit()"
+      novalidate
+      autocomplete="off">
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">
+            Libras a Kilogramos
+          </h3>
+        </div>
+
+        <div class="card-body">
+          <app-form-field
+            label="Libras"
+            [required]="true"
+            [control]="poundsform.controls['pounds']"
+            [isInline]="false">
+            <app-input
+              formControlName="pounds"
+              placeholder="Digite el peso en libras">
+            </app-input>
+          </app-form-field>
+        </div>
+
+        <div class="card-footer">
+          <app-button type="submit">Calcular</app-button>
+        </div>
+      </div>
+    </form>
+
+    <div class="alert alert-success" role="alert"
+      *ngIf="poundsResult">
+      <h2 class="alert-heading">
+        {{poundsResult | number: '1.0-2'}}kg
+      </h2>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+

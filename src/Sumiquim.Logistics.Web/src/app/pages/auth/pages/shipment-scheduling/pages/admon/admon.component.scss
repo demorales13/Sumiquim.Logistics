@@ -1,0 +1,18 @@
+@import "colors";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  .actions {
+    float: right;
+    font-size: 30px;
+    cursor: pointer;
+    //color: $secondary-dark;
+    color: $primary-dark;
+  }
+}
+
+.body {
+  margin-top: 20px;
+}

@@ -1,0 +1,30 @@
+<div class="form-field"
+  [class.form-field_m_error]="hasError()"
+  [class.form-field_m_inline]="isInline">
+  <label class="form-field_label">
+    {{ label }}
+    <span class="form-field_req" *ngIf="required">*</span>
+  </label>
+  <div class="form-field_control">
+    <ng-content></ng-content>
+
+    <div class="form-field_error">
+      <ng-container *ngIf="control && errorKey" [ngSwitch]="errorKey">
+        <span *ngSwitchCase="'min'">Mínimo {{ control.errors ? control.errors[errorKey].min : 0 }}</span>
+        <span *ngSwitchCase="'max'">Máximo {{ control.errors ? control.errors[errorKey].max : 1000000 }}</span>
+        <span *ngSwitchCase="'required'">Campo obligatorio</span>
+        <span *ngSwitchCase="'requiredtrue'">Campo obligatorio</span>
+        <span *ngSwitchCase="'minlength'">Cantidad de carácteres mínima {{ control.errors ? control.errors[errorKey].requiredLength : 0 }}</span>
+        <span *ngSwitchCase="'maxlength'">Cantidad de carácteres máxima {{ control.errors ? control.errors[errorKey].requiredLength : 0 }}</span>
+        <span *ngSwitchCase="'pattern'">
+          <span *ngIf="patternError">
+            {{ patternError }}
+          </span>
+          <span *ngIf="!patternError">
+            La expresión regular no es válida
+          </span>
+        </span>
+      </ng-container>
+    </div>
+  </div>
+</div>

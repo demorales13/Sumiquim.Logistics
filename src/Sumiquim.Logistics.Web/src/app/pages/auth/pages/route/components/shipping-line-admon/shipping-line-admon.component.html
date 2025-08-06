@@ -1,0 +1,47 @@
+
+<div class="line">
+  <div class="viewFooter" (click)="onViewFooter()">
+    <i class="fas"
+       [ngClass]="viewFooter ? 'fa-angle-double-up': 'fa-angle-double-down'"></i>
+  </div>
+  <div class="data">
+    <div class="header">
+      <div class="client">
+        {{shippingLine.client?.name}}
+      </div>
+    </div>
+    <div class="details">
+      <div class="item">
+        {{shippingLine.item?.name}}
+      </div>
+      <div class="batch">
+        {{shippingLine.batch}}
+      </div>
+      <div class="quantity">
+        {{shippingLine.quantity}}
+      </div>
+      <div class="status">
+        <i class="fas fa-bowling-ball" ngClass="{{shippingLine.status}}"></i>
+      </div>
+      <div class="actions">
+      </div>
+    </div>
+    <div class="notes">
+      <span>
+        <strong>NOTAS:</strong> {{shippingLine.notes}}
+      </span>
+    </div>
+    <div class="footer" *ngIf="viewFooter">
+      <span>
+        <strong>Guia:</strong> {{shippingLine.guide}}
+      </span>
+      <span>
+        <strong>Transportadora:</strong> {{shippingLine.courierCompany?.name}}
+      </span>
+    </div>
+  </div>
+</div>
+
+
+
+

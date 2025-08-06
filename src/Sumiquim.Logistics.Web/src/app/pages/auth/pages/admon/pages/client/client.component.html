@@ -1,0 +1,12 @@
+
+  <a class="btn btn-app" appExcelToJson [fields]="fields" (changed)="onChange($event)">
+    <i class="fas fa-edit"></i>
+    Adicionar Clientes
+  </a>
+
+  <ng-container *ngIf="clients.length">
+    <div class="clients">
+      <li *ngFor="let client of clients">{{client.name}}</li>
+    </div>
+    <app-button type="button" class="btn btn-sm" (click)="save()">Guardar Clientes</app-button>
+  </ng-container>

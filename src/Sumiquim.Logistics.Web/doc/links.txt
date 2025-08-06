@@ -1,0 +1,62 @@
+
+https://aldialogistica.com/rastreo/rastreo.php?remesa=222602218797
+
+
+
+
+REAL ORJUELA INGRID JOHANNA        ijreal@sumiquim.com
+ANDRADE OROZCO DIGNA MARIA         dmandrade@sumiquim.com
+
+
+
+
+
+
+
+
+
+
+
+ASUNTO: Confirmación de programación de despachos
+Buen día Jessica,
+
+Las siguientes ordenes de compra han sido programadas para despacho:
+
+ORDEN DE COMPRA   CLIENTE        ITEM                    CANTIDAD     FECHA 
+53534534543       SERVINSUMOS    00000466 BIOSURE ABD        25kg     25/01/2024
+
+
+Atentamente,
+
+Equipo Logística
+SUMIQUIM SAS
+
+
+
+
+
+ASUNTO: Confirmación de envío de despachos
+Buen día Jessica,
+
+Las siguientes ordenes de compra han sido despachadas el día de hoy:
+
+ORDEN DE COMPRA   CLIENTE        ITEM                    CANTIDAD             LINK
+53534534543       SERVINSUMOS    00000466 BIOSURE ABD        25kg     343343333333
+
+
+Atentamente,
+
+Equipo Logística
+SUMIQUIM SAS
+
+
+
+
+
+ASUNTO: Modificación de despacho
+Buen día Jessica,
+
+Las siguientes ordenes de compra presentaron novedad para despacho
+
+ORDEN DE COMPRA   CLIENTE        ITEM                    CANTIDAD      NOVEDAD  
+53534534543       SERVINSUMOS    00000466 BIOSURE ABD        25kg      blablablabla 

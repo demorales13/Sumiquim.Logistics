@@ -1,0 +1,9 @@
+<div class="header">
+  <app-button class="btn-sm" (click)="onAddOrder()">Agregar Pedidos Pendientes</app-button>
+</div>
+
+<div class="body">
+  <ng-container *ngFor="let line of pendingOrderLines">
+    <app-pending-order-line-admon [pendingOrder]="line" (clicked)="onPendingOrderClick($event)"></app-pending-order-line-admon>
+  </ng-container>
+</div>

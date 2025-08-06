@@ -1,0 +1,52 @@
+@import "colors";
+
+.form-field {
+  padding-bottom: 12px;
+
+  &_label {
+    display: flex;
+    margin: 0 0 6px 0;
+    font-weight: 700;
+    font-size: 80%;
+  }
+
+  &_req {
+    margin-left: 2px;
+  }
+
+  &_control {
+    display: block;
+  }
+
+  &_error {
+    opacity: 0;
+    font-size: 12px;
+    color: $error;
+    padding: 4px 0;
+    min-height: 22px;
+    display: none;
+  }
+
+  span {
+    display: block;
+  }
+
+  &_m_error {
+    .form-field_error {
+      opacity: 1;
+      display:inline;
+    }
+  }
+
+  &_m_inline {
+    display: flex;
+    >.form-field_label {
+      padding: 10px 12px 10px 0;
+      width: 30%;
+    }
+
+    >.form-field_control {
+      width: 70%;
+    }
+  }
+}

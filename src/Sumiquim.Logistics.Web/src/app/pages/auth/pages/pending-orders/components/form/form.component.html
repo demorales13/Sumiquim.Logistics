@@ -1,0 +1,60 @@
+<form [formGroup]="form" novalidate class="form-horizontal"
+  (ngSubmit)="onSubmit()">
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Adicionar Pedido Pendiente</h2>
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" (click)="onClose()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="card-body">
+
+      <app-form-field
+        label="Cliente"
+        [required]="true"
+        [control]="form.controls['client']">
+        <app-autocomplete
+          formControlName="client"
+          [items]="clients"
+          placeholder="Seleccione un cliente">
+        </app-autocomplete>
+      </app-form-field>
+
+      <app-form-field
+        label="Item"
+        [required]="true"
+        [control]="form.controls['item']">
+        <app-autocomplete
+          formControlName="item"
+          [items]="items"
+          placeholder="Seleccione un item">
+        </app-autocomplete>
+      </app-form-field>
+
+      <app-form-field
+        label="Cantidad"
+        [required]="true"
+        [control]="form.controls['quantity']">
+        <app-input formControlName="quantity" placeholder="Digite la cantidad"></app-input>
+      </app-form-field>
+
+      <app-form-field
+        label="Notas"
+        [required]="true"
+        [control]="form.controls['notes']">
+        <textarea rows="4" formControlName="notes" >
+        </textarea>
+      </app-form-field>
+
+    </div>
+
+    <div class="card-footer right">
+      <button type="submit"  class="app-button">Enviar</button>
+    </div>
+  </div>
+
+</form>

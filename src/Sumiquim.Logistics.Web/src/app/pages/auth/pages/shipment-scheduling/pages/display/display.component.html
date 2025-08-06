@@ -1,0 +1,9 @@
+<div class="header">
+  <app-date (changed)="onDateChanged($event)" [value]="today"></app-date>
+</div>
+
+<div class="body">
+  <ng-container *ngFor="let line of shippingLines | orderBy:'carrierCompany': true">
+    <app-shipping-line [shippingLine]="line"></app-shipping-line>
+  </ng-container>
+</div>

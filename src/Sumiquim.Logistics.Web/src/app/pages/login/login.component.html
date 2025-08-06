@@ -1,0 +1,71 @@
+<div class="login-page">
+
+
+  <div class="login-wrapper">
+
+    <div class="row">
+      <div class="col-sm">
+        <div class="login_header">
+          <img src="assets/images/logo.png" alt="site_logo" />
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm">
+        <div class="login-form">
+          <div class="header">
+            <div class="avatar-container">
+              <div class="avatar">
+                <i class="fa-solid fa-user-lock"></i>
+              </div>
+            </div>
+            <div class="text">
+              <div class="title">Inicio de Sesión</div>
+              <div class="subtitle">Digite su email y contraseña</div>
+            </div>
+          </div>
+
+
+          <form [formGroup]="form" novalidate
+                class="form-horizontal"
+                (ngSubmit)="login()">
+
+            <div class="mt-3">
+              <app-form-field
+                  label="Email"
+                  [required]="true"
+                  [control]="form.controls['email']">
+                  <app-input
+                    formControlName="email"
+                    placeholder="Digite su email">
+                  </app-input>
+              </app-form-field>
+
+              <app-form-field
+                  label="Contraseña"
+                  [required]="true"
+                  [control]="form.controls['password']">
+                  <app-password
+                    formControlName="password"
+                    placeholder="Digite su contraseña">
+                  </app-password>
+              </app-form-field>
+            </div>
+
+            <div class="d-grid gap-2 mt-3">
+              <button  class="btn btn-lg btn-success btn-flat btn-block"
+                     type="submit">
+                Ingresar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

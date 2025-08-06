@@ -1,0 +1,26 @@
+--- Compilar para producción
+ng build --configuration "production"
+
+--- Login en firebase. Se corre para saber si se está logueado, si no abre una ventana para loguearse
+firebase login
+
+--- Inicializar configuración despliegue. No es necesario este paso, ya está configurado
+firebase init
+    * Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys
+    * colocar en carpeta publica dist/sumiquim/browser
+    * seleccionar que si se quiere una single web page
+        * Si la ruta se seleccionó bien va a preguntar si desea sobre escribir el archivo index.html, si no, la ruta no está bien seleccionada
+    * seleccionar que no sobrescriba el index.html
+
+--- Desplegar
+firebase deploy
+
+
+--- en caso de error => Error: Failed to list functions for sumiquim-f9250
+--- Instalar esta versión del firebase tools
+npm install -g firebase-tools@11.13.0
+
+
+
+--- para instar en hostgator, esto hace el build de produccion y copia el archivo .htaccess
+npm run build-prod

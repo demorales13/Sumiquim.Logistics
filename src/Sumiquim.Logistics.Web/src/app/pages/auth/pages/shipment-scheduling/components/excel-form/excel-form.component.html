@@ -1,0 +1,82 @@
+<form novalidate class="form-horizontal" (ngSubmit)="onSubmit($event)">
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Adicionar Pedidos</h2>
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" (click)="onClose()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="mb-3">
+        <input type="file" id="fileInput" class="form-control" (change)="onAddExcelFile($event)">
+      </div>
+
+      <hr>
+
+      <div *ngIf="errors.length === 0 && shippings.length > 0">
+        <table class="table table-bordered main-table">
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Item</th>
+              <th>Lote</th>
+              <th>Cantidad</th>
+              <th>Fecha</th>
+              <th>Transportadora</th>
+              <th>Notas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let shipping of shippings">
+              <td>{{ shipping.client }}</td>
+              <td>{{ shipping.item }}</td>
+              <td>{{ shipping.batch }}</td>
+              <td>{{ shipping.quantity }}</td>
+              <td>{{ shipping.date | date:'dd MMMM, YYYY'}}</td>
+              <td>{{ shipping.carrierCompany }}</td>
+              <td>{{ shipping.notes }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <div *ngIf="errors.length > 0">
+        <div class="alert alert-danger" role="alert">
+          {{ errors.length }} error{{ errors.length === 1 ? ' fue' : 'es fueron' }} encontrado{{ errors.length === 1 ? '' : 's' }} mientras se procesaba el archivo de Excel.
+        </div>
+
+        <table class="table table-bordered">
+          <thead class="table-danger">
+            <tr>
+              <th>Cliente</th>
+              <th>Item</th>
+              <th>Lote</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let error of errors">
+              <td>{{ error.client }}</td>
+              <td>{{ error.item }}</td>
+              <td>{{ error.batch }}</td>
+              <td>{{ error.description }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+
+    <div class="card-footer right">
+      <button (click)="onSubmit($event)" class="app-button" [disabled]="errors.length > 0 || shippings.length === 0">Enviar</button>
+    </div>
+  </div>
+
+</form>

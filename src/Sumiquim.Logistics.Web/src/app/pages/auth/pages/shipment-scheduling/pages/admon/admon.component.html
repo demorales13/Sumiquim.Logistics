@@ -1,0 +1,20 @@
+<div class="header">
+  <app-date (changed)="onDateChanged($event)" [value]="date"></app-date>
+
+  <div class="actions">
+    <i class="fas fa-envelope-circle-check" (click)="onCheckEmails()"></i>
+    <i class="fas fa-file-import ms-4" (click)="onAddExcelFile()"></i>
+  </div>
+
+</div>
+
+<div class="body">
+  <ng-container *ngFor="let line of ShippingLines | orderBy:'carrierCompany': true">
+    <app-shipping-line-admon [shippingLine]="line" 
+      (editClicked)="onShippingEditClick($event)"
+      (deleteClicked)="onShippingDeleteClick($event)"
+      (incidentClicked)="onShippingIncidentClick($event)">
+    </app-shipping-line-admon>
+  </ng-container>
+</div>
+

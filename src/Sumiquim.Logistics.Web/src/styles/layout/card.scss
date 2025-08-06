@@ -1,0 +1,71 @@
+.card {
+  box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+  position: relative;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 0 solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+
+  .card-header {
+    background-color: transparent;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    padding: 0.75rem 1.25rem;
+    position: relative;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+
+    .card-title {
+      float: left;
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .card-tools {
+      float: right;
+      margin-right: -0.625rem;
+    }
+  }
+
+  .card-body {
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+  }
+
+  .card-footer {
+    padding: 0.75rem 1.25rem;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-top: 0 solid rgba(0, 0, 0, 0.125);
+
+    &.right {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+  }
+
+  &.card-primary {
+    &.card-outline {
+      border-top: 3px solid #007bff;
+    }
+  }
+}
+
+.btn-tool {
+  background-color: transparent;
+  color: #adb5bd;
+  font-size: 0.875rem;
+  margin: -0.75rem 0;
+  padding: 0.25rem 0.5rem;
+}

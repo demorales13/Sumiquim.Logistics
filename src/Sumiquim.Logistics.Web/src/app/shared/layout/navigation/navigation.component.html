@@ -1,0 +1,58 @@
+<aside class="main-sidebar" [ngClass]="{ 'sidebar-collapse': collapse, 'sidebar-open': !collapse }">
+    <!-- Brand Logo -->
+    <a class="brand-link">
+      <img src="assets/images/logo.png" alt="Sumiquim" class="brand-image">
+      <span class="brand-text">SQ</span>
+    </a>
+
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 mb-3 pb-3">
+        <div class="image">
+          <img src="assets/images/avatar_nav_bar.png" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a class="d-block">
+            {{ (authService.profile$ | async)?.name }}
+            {{ (authService.profile$ | async)?.lastName }}
+          </a>
+        </div>
+      </div>
+
+
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-sidebar flex-column">
+
+          <ng-container *ngFor="let item of menu">
+
+            <ng-template [ngxPermissionsOnly]="item.permissions">
+              <li class="nav-header" *ngIf="item.title">{{ item.title }}</li>
+
+              <ng-container *ngFor="let link of item.links" >
+
+                <li class="nav-item"  [routerLink]="link.link" >
+                  <a class="nav-link" [routerLinkActive]="['active']">
+                    <i class="nav-icon {{ link.icon }}"></i>
+                    <p>
+                      {{ link.title }}
+                    </p>
+                  </a>
+                </li>
+              </ng-container>
+            </ng-template>
+
+
+          </ng-container>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="version">
+      <p>PLANEACIÓN DE RUTA DE DESPACHOS</p>
+      <p>Creación: 11-01-2022</p>
+      <p>F-LD-04 /Versión 4</p>
+    </div>
+  </aside>
+

@@ -1,0 +1,48 @@
+<form novalidate class="form-horizontal">
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">{{data.title}}</h2>
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" (click)="onClose()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <ng-container *ngIf="!files.length">
+        <div class="dropzone" appDropZone (hovered)="toggleHover($event)" [class.dropzone_hovered]="isHovering" (dropped)="onDrop($event)">
+          <div class="dropzone_label">Arrastra tus archivos aquí o </div>
+          <div class="dropzone_file">
+            <label class="file">
+              <input class="file_input" type="file" (change)="onDropFile($event)" />
+              <span class="file_label">Selecciona un archivo</span>
+            </label>
+          </div>
+        </div>
+        <div class="error" *ngIf="isError">
+          Seleccione un archivo
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="files.length">
+        <div *ngFor="let file of files" class="selected-file">
+          <span class="name">{{ file.name }}</span>
+          <span class="size">{{ file.size | fileSize }}</span>
+          <span>{{(items$ | async)?.length}} registros</span>
+        </div>
+
+        <div class="error-message" *ngIf="error">
+          <span class="error">{{error.description}}</span>
+          <span class="error">{{error.data}}</span>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="card-footer">
+      <button type="button" class="app-button" (click)="onComplete()">Cargar datos</button>
+    </div>
+  </div>
+
+</form>

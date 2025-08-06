@@ -1,0 +1,61 @@
+@import "colors";
+
+.dropzone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 2px dashed $secondary-dark;
+  border-radius: 4px;
+  padding: 20px;
+
+  &_hovered {
+    border: 2px solid $primary;
+    .dropzone_label, .dropzone_file {
+      opacity: 0.3;
+    }
+  }
+}
+
+.file {
+  &_input {
+    display: none;
+  }
+
+  &_label {
+    color: $primary-dark;
+    &:hover {
+      color: $primary;
+      cursor: pointer;
+    }
+  }
+}
+
+.selected-file {
+  padding: 12px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.05);
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  color: $primary-dark;
+  .name {
+    font-weight: 500;
+  }
+
+  .size {
+    font-size: 90%;
+  }
+}
+
+.error-message {
+  display: flex;
+  flex-direction: column;
+  .error {
+    font-size: 12px;
+    color: $error;
+    padding: 4px 0;
+    min-height: 22px;
+  }
+}
+

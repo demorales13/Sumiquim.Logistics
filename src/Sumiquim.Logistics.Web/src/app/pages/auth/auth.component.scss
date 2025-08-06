@@ -1,0 +1,32 @@
+@import "colors";
+
+.content-wrapper {
+  background: $base;
+  padding: 10px 2px;
+  margin-left: 250px;
+
+  .content {
+    height: calc(100vh - 80px);
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  &.sidebar-collapse {
+    margin-left: 50px;
+  }
+
+  @media (max-width: 991.98px){
+    // En pantallas pequeñas se oculta el menu lateral
+    margin-left: 0px;
+    transition: 0.25s;
+
+    &.sidebar-open {
+      margin-left: 0px;
+    }
+
+    &.sidebar-collapse {
+      margin-left: 0px;
+    }
+  }
+}
+

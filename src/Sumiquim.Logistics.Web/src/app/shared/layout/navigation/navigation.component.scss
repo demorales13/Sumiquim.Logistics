@@ -1,0 +1,218 @@
+@import "colors";
+
+aside {
+  background-color: $header-color;
+  position: absolute;
+  top: 0;
+
+
+  @media (min-width: 991.99px) {
+    // En pantallas grandes se muestra el menu lateral
+    display: block;
+    transition: 0.50s;
+  }
+
+  @media (max-width: 991.98px) {
+    // En pantallas pequeñas se oculta el menu lateral
+    display: none;
+    transition: 0.25s;
+  }
+
+
+  &.main-sidebar {
+    height: 100vh;
+    overflow-y: hidden;
+    z-index: 1038;
+    transition: margin-left .3s ease-in-out, width .3s ease-in-out;
+    width: 250px;
+    box-shadow: 0 14px 28px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.22)!important;
+
+    .brand-link {
+      border-bottom: 1px solid $base-darker;
+      color: $base;
+      display: flex;
+      justify-content: center;
+      font-size: 1.25rem;
+      line-height: 1.5;
+      transition: width .3s ease-in-out;
+      white-space: nowrap;
+      max-height: 55px;
+      height: 55px;
+
+      .brand-image {
+        float: left;
+        line-height: .8;
+        margin-left: 4px;
+        margin-right: 15px;
+        margin-top: 0;
+        border-radius: 0;
+        margin-bottom: -.25rem;
+        height: 100%;
+      }
+
+      .brand-text {
+        transition: margin-left .3s linear,opacity .3s ease,visibility .3s ease;
+        font-weight: 600 !important;
+        color: $on-header-color;
+        display: none;
+      }
+    }
+
+    .sidebar {
+      background-color: $nav-color;
+      height: calc(100% - (3.5rem + 1px));
+      overflow-y: auto;
+      padding: 0 .5rem;
+
+      .user-panel {
+        border-bottom: 1px solid $on-nav-color-dark;
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        img {
+          height: auto;
+          width: 2.1rem;
+          border-radius: 50%;
+          margin-left: 0.8rem;
+          background-color: $base-light;
+        }
+
+        .info {
+          padding: 5px 5px 5px 10px;
+          transition: margin-left .3s linear,opacity .3s ease,visibility .3s ease;
+          overflow: hidden;
+          white-space: nowrap;
+
+          a{
+            color: $on-nav-color-light;
+          }
+
+        }
+      }
+
+      .nav-sidebar {
+        margin: -.25rem -.5rem 0;
+        white-space: nowrap;
+        overflow: hidden;
+        position: relative;
+        margin: -.25rem -.5rem 0;
+
+        .nav-header {
+          white-space: nowrap;
+          overflow: hidden;
+          padding-top: .25rem;
+          padding-bottom: .25rem;
+          font-size: .9rem;
+          padding: .5rem;
+          background: inherit;
+          color: $on-nav-color-dark;
+          font-weight: 500;
+        }
+
+        .nav-item {
+          color: $on-nav-color-light;
+          position: relative;
+          white-space: nowrap;
+          overflow: hidden;
+
+          :hover {
+            color: hsla(0,0%,100%,.3);
+            background-color: hsla(0,0%,100%,.1);
+          }
+
+          .nav-link {
+            position: relative;
+            white-space: nowrap;
+            overflow: hidden;
+            padding: .4rem .8rem;
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            align-items: center;
+            color: $on-nav-color-light;
+
+            &.active {
+              background-color: $on-nav-color-active;
+              color: $base-light;
+            }
+
+            p {
+              margin: 0;
+              margin-left: 8px;
+              &:hover {
+                background-color: transparent;
+                text-decoration: none;
+                color: $on-nav-color-light;
+              }
+            }
+
+            i {
+              width: 25px;
+              text-align: center;
+              &:hover {
+                background-color: transparent;
+                text-decoration: none;
+                color: $on-nav-color-light;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &.sidebar-collapse {
+      width: 50px;
+
+      .nav-link p {
+        display: none;
+      }
+
+      .nav-header{
+        display: none;
+      }
+
+      .user-panel {
+        .image img {
+          margin-left: 0;
+        }
+      }
+
+      .brand-link {
+        .brand-image {
+          display: none;
+        }
+        .brand-text {
+          display: block;
+          line-height: 55px;
+        }
+      }
+
+      .version {
+        display: none;
+      }
+    }
+
+    &.sidebar-open {
+      display: block;
+      transition: 0.50s;
+    }
+
+    .version {
+      position: absolute;
+      bottom: 3px;
+      margin-left: 12px;
+
+      p {
+        font-size: 10px;
+        color: $base-dark;
+        line-height: 2px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+

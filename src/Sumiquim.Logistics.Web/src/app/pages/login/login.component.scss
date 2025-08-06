@@ -1,0 +1,116 @@
+@import "mixins";
+
+.login-page {
+  min-height: calc(100vh) !important;
+  background-color: $base;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .login-wrapper {
+    background: $base-light;
+    box-sizing: border-box;
+    place-content: center;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid $base-dark;
+    @include shadow;
+
+    @media (max-width: 600px) {
+      width: 300px;
+    }
+
+
+    .login_header {
+      background: $base-light;
+      text-align: center;
+      border-bottom: 1px solid $base-dark;
+      margin-bottom: 20px;
+      padding: 15px;
+
+      img {
+        max-height: 150px;
+        width: 100%;
+      }
+    }
+
+    .login-form {
+      background: $base-light;
+      width: 100%;
+      max-width: 100%;
+      padding: 20px 30px 10px;
+      border-radius: 10px;
+
+      .header {
+        flex-direction: row;
+        box-sizing: border-box;
+        display: flex;
+        place-content: center flex-start;
+        align-items: center;
+        flex: 1 0 auto;
+        justify-content: center;
+
+        .avatar-container {
+          position: relative;
+          margin-right: 16px;
+
+          .avatar {
+            border-radius: 50%;
+            font-size: 17px;
+            font-weight: 600;
+            text-align: center;
+            width: 72px;
+            min-width: 72px;
+            height: 72px;
+            line-height: 72px;
+            color: rgba(0, 0, 0, 0.87);
+            margin: 0;
+
+            i {
+              font-size: 65px;
+              color: $primary;
+            }
+          }
+
+          span {
+            color: $error;
+            position: absolute;
+            bottom: -2px;
+            right: -6px;
+            font-size: 32px !important;
+            width: 32px !important;
+            height: 32px !important;
+            min-width: 32px !important;
+            min-height: 32px !important;
+            line-height: 32px !important;
+          }
+        }
+
+        .text {
+          text-rendering: optimizeLegibility;
+          box-sizing: border-box;
+
+          @media (max-width: 600px) {
+            display: none;
+          }
+
+          .title {
+            font-size: 20px;
+            margin-bottom: 8px;
+          }
+
+          .subtitle {
+            color: rgba(0, 0, 0, 0.54);
+            font-size: 15px;
+          }
+        }
+      }
+    }
+
+    .form {
+      width: 100%;
+      margin: 16px 0 0;
+    }
+
+  }
+}

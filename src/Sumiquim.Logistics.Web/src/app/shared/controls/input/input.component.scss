@@ -1,0 +1,7 @@
+@import "colors";
+
+:host-context(.form-field_m_error) {
+  input {
+    border: 1px solid $error;
+  }
+}

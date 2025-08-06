@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "sumiquim-f9250": {
+      "hosting": {
+        "sumiquim": [
+          "sumiquim-f9250"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "sumiquim-f9250"
+  }
+}

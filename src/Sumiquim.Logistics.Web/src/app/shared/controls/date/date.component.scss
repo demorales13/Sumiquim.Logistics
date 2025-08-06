@@ -1,0 +1,16 @@
+// Se debe configurar el MAT_DATE_LOCALE, MAT_DATE_FORMATS, MatDatepickerModule y MatNativeDateModule
+
+@import "colors";
+
+.date {
+  display: inline-flex;
+  width: 100%;
+}
+
+
+:host-context(.form-field_m_error){
+  .input {
+    border: 1px solid $error;
+  }
+}
+

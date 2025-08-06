@@ -1,0 +1,56 @@
+@import "mixins";
+
+.line {
+  display: flex;
+  flex-direction: row;
+  padding: 7px;
+  @include shadow;
+  margin-bottom: 5px;
+  border-radius: 5px;
+
+  @media (max-width: 450px) {
+    font-size: 70%;
+  }
+
+  .data {
+    width: 100%;
+    margin-left: 5px;
+
+    .header {
+      margin-bottom: 5px;
+      .client {
+        flex: 0 0 100%;
+        padding-right: 10px;
+        font-weight: 500;
+      }
+    }
+
+    .details {
+      display: flex;
+      flex-direction: row;
+
+      .item {
+        flex: 0 0 60%;
+        padding-right: 10px;
+      }
+      .quantity {
+        flex: 0 0 40%;
+        padding-right: 20px;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+
+    .notes {
+      display: flex;
+      flex-direction: row;
+      margin: 10px 0px 0px;
+      padding-top: 3px;
+
+      span {
+        font-style: italic;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,10 @@
+<div class="header">
+  <app-date (changed)="onDateChanged($event)" [value]="date"></app-date>
+</div>
+
+<div class="body">
+  <ng-container *ngFor="let line of shippingLines">
+    <app-shipping-line-admon [shippingLine]="line"></app-shipping-line-admon>
+  </ng-container>
+</div>
+

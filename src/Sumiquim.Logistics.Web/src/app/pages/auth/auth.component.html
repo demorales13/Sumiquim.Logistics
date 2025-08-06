@@ -1,0 +1,15 @@
+<app-header [collapse]="collapse" (collapseEvent)="onCollapseEvent()"></app-header>
+<app-navigation [collapse]="collapse"></app-navigation>
+
+<div class="content-wrapper" [ngClass]="{'sidebar-collapse' : collapse, 'sidebar-open': !collapse }">
+      <div class="content-header">
+        <div class="container-fluid"></div>
+      </div>
+
+      <div class="content">
+        <div class="container-fluid">
+            <router-outlet></router-outlet>
+        </div>
+      </div>
+</div>
+

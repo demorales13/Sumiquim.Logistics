@@ -1,0 +1,86 @@
+<form [formGroup]="form" novalidate class="form-horizontal"
+  (ngSubmit)="onSubmit()">
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Adicionar Novedad</h2>
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" (click)="onClose()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="card-body">
+
+      <app-form-field
+        label="Cliente"
+        [required]="true"
+        [control]="form.controls['client']">
+        <label for="">
+          {{ form.value.client }}
+        </label>
+      </app-form-field>
+
+      <app-form-field
+        label="Item"
+        [required]="true"
+        [control]="form.controls['item']">
+        <label for="">
+          {{ form.value.item }}
+        </label>
+      </app-form-field>
+
+      <app-form-field
+        label="Lote"
+        [required]="true"
+        [control]="form.controls['batch']">
+        <label for="">
+          {{ form.value.batch }}
+        </label>
+      </app-form-field>
+
+      <app-form-field
+        label="Cantidad"
+        [required]="true"
+        [control]="form.controls['quantity']">
+        <label for="">
+          {{ form.value.quantity }}kg
+        </label>
+      </app-form-field>
+
+      <app-form-field
+        label="Empresa transportadora"
+        [required]="true"
+        [control]="form.controls['courierCompany']">
+        <label for="">
+          {{ form.value.carrierCompany }}
+        </label>
+      </app-form-field>
+
+      <app-form-field
+        label="Guia"
+        [required]="true"
+        [control]="form.controls['guide']">
+        <label for="">
+          {{ form.value.guide }}
+        </label>
+      </app-form-field>
+
+      <app-form-field
+        label="Novedad"
+        [required]="true"
+        [control]="form.controls['incident']">
+        <textarea rows="4" formControlName="incident" >
+        </textarea>
+      </app-form-field>
+
+    </div>
+
+    <div class="card-footer right">
+      <button type="submit"  class="app-button">Enviar</button>
+    </div>
+  </div>
+
+</form>
+

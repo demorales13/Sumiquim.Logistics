@@ -18,6 +18,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sumiquim.Logistics.Application", "src\Sumiquim.Logistics.Application\Sumiquim.Logistics.Application.csproj", "{10E3CF92-E8DB-41F9-AEE0-DEE358E6E258}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Sumiquim.Logistics.Web", "src\Sumiquim.Logistics.Web\", "{BDAEF7CC-5062-C1E1-F920-10CA68A477D3}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_53220"
+		Debug.AspNetCompiler.PhysicalPath = "src\Sumiquim.Logistics.Web\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53220\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_53220"
+		Release.AspNetCompiler.PhysicalPath = "src\Sumiquim.Logistics.Web\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53220\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "53220"
+		SlnRelativePath = "src\Sumiquim.Logistics.Web\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +61,10 @@ Global
 		{10E3CF92-E8DB-41F9-AEE0-DEE358E6E258}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10E3CF92-E8DB-41F9-AEE0-DEE358E6E258}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10E3CF92-E8DB-41F9-AEE0-DEE358E6E258}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDAEF7CC-5062-C1E1-F920-10CA68A477D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDAEF7CC-5062-C1E1-F920-10CA68A477D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDAEF7CC-5062-C1E1-F920-10CA68A477D3}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDAEF7CC-5062-C1E1-F920-10CA68A477D3}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,6 +74,7 @@ Global
 		{8CFE5827-1253-ED21-5EDA-E7A2DBF8B760} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{4FF4480B-8C85-FBCB-4970-E90468A5950A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{10E3CF92-E8DB-41F9-AEE0-DEE358E6E258} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{BDAEF7CC-5062-C1E1-F920-10CA68A477D3} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2DC08996-FD90-4AFD-8F80-C1E23BA5A54C}

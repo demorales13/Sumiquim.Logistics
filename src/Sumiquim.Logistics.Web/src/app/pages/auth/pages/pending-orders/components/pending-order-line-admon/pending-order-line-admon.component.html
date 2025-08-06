@@ -1,0 +1,25 @@
+<div class="line">
+  <div class="data">
+    <div class="header">
+      <div class="client">
+        {{pendingOrder.client?.name}}
+      </div>
+    </div>
+    <div class="details">
+      <div class="item">
+        {{pendingOrder.item?.name}}
+      </div>
+      <div class="quantity">
+        {{pendingOrder.quantity}}
+      </div>
+      <div class="actions">
+        <i class="fas fa-trash" (click)="onClick()"></i>
+      </div>
+    </div>
+    <div class="notes">
+      <span>
+        <strong>NOTAS:</strong> {{pendingOrder.notes}}
+      </span>
+    </div>
+  </div>
+</div>

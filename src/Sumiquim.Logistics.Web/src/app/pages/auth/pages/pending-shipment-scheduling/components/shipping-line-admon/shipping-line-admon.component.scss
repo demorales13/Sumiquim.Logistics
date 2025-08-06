@@ -1,0 +1,109 @@
+@import "mixins";
+
+.line {
+  display: flex;
+  flex-direction: row;
+  padding: 7px;
+  @include shadow;
+  margin-bottom: 5px;
+  border-radius: 5px;
+
+  @media (max-width: 450px) {
+    font-size: 70%;
+  }
+
+  .viewFooter {
+    font-size: 90%;
+    cursor: pointer;
+  }
+
+  .data {
+    width: 100%;
+    margin-left: 5px;
+
+    .header {
+      margin-bottom: 5px;
+      .client {
+        flex: 0 0 100%;
+        padding-right: 10px;
+        font-weight: 500;
+      }
+    }
+
+    .details {
+      display: flex;
+      flex-direction: row;
+
+      .item {
+        flex: 0 0 40%;
+        padding-right: 10px;
+      }
+      .batch {
+        flex: 0 0 30%;
+        padding-right: 10px;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .quantity {
+        flex: 0 0 15%;
+        padding-right: 10px;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .status {
+        flex: 0 0 7%;
+        font-size: 110%;
+        display: flex;
+        justify-content: center;
+
+        .pending {
+          color: $error;
+        }
+        .scheduled{
+          color: $secondary-dark;
+        }
+        .sent {
+          color: $primary-dark;
+        }
+      }
+      .actions {
+        flex: 0 0 8%;
+        display: flex;
+        justify-content: flex-end;
+        i{
+          cursor: pointer;
+          color: $primary-dark;
+          &.fa-trash{
+            color: $base-darker;
+          }
+          &.fa-comment-slash{
+            color: $base-darker;
+          }
+        }
+      }
+    }
+
+    .notes {
+      display: flex;
+      flex-direction: row;
+      margin: 10px 0px 0px;
+      padding-top: 3px;
+
+      span {
+        font-style: italic;
+      }
+    }
+
+    .footer {
+      margin-top: 16px;
+      font-size: 90%;
+      border-top: 1px solid $base-light;
+      padding-top: 10px;
+
+      span {
+        display: block;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}
