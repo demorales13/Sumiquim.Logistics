@@ -1,0 +1,12 @@
+
+// ver la ultima version instalada de EF
+dotnet ef --version
+
+// actualizar EF a la ultima version
+dotnet tool update --global dotnet-ef
+
+// crear una nueva migracion
+dotnet ef migrations add InitialCreate --project .\src\Sumiquim.Logistics.Infrastructure\ --startup-project .\src\Sumiquim.Logistics.API\ --output-dir Migrations
+
+// aplicar las migraciones pendientes
+dotnet ef database update --project .\src\Sumiquim.Logistics.Infrastructure\ --startup-project .\src\Sumiquim.Logistics.API\

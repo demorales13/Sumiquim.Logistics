@@ -1,0 +1,5 @@
+﻿using Sumiquim.Logistics.Application.Abstractions.Messaging;
+
+namespace Sumiquim.Logistics.Application.ShippingSchedulings.ShippingSchedulingShipmentNotificationEmail;
+
+public record ShippingSchedulingShipmentNotificationEmailCommand() : ICommand<ShippingSchedulingShipmentNotificationEmailResponse>;

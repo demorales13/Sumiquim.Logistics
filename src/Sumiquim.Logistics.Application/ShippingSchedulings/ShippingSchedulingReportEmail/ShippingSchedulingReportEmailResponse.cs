@@ -1,0 +1,3 @@
+﻿namespace Sumiquim.Logistics.Application.ShippingSchedulings.ShippingSchedulingReportEmail;
+
+public record ShippingSchedulingReportEmailResponse(bool result);

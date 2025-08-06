@@ -1,0 +1,3 @@
+﻿namespace Sumiquim.Logistics.Application.ShippingSchedulings.CreateShippingSchedulingFromExcel;
+
+public record CreateShippingSchedulingResponse(bool response);

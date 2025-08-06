@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.36105.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sumiquim.Logistics.Domain", "src\Sumiquim.Logistics.Domain\Sumiquim.Logistics.Domain.csproj", "{A66AD08E-B4D3-F45C-E57A-B098D03FAC77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sumiquim.Logistics.Infrastructure", "src\Sumiquim.Logistics.Infrastructure\Sumiquim.Logistics.Infrastructure.csproj", "{8CFE5827-1253-ED21-5EDA-E7A2DBF8B760}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sumiquim.Logistics.API", "src\Sumiquim.Logistics.API\Sumiquim.Logistics.API.csproj", "{4FF4480B-8C85-FBCB-4970-E90468A5950A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentation", "{26A3CD57-0252-48AE-8A03-1FAFCC5653DD}"
+	ProjectSection(SolutionItems) = preProject
+		documentation\migration.txt = documentation\migration.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sumiquim.Logistics.Application", "src\Sumiquim.Logistics.Application\Sumiquim.Logistics.Application.csproj", "{10E3CF92-E8DB-41F9-AEE0-DEE358E6E258}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A66AD08E-B4D3-F45C-E57A-B098D03FAC77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A66AD08E-B4D3-F45C-E57A-B098D03FAC77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A66AD08E-B4D3-F45C-E57A-B098D03FAC77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A66AD08E-B4D3-F45C-E57A-B098D03FAC77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CFE5827-1253-ED21-5EDA-E7A2DBF8B760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CFE5827-1253-ED21-5EDA-E7A2DBF8B760}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CFE5827-1253-ED21-5EDA-E7A2DBF8B760}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CFE5827-1253-ED21-5EDA-E7A2DBF8B760}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FF4480B-8C85-FBCB-4970-E90468A5950A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FF4480B-8C85-FBCB-4970-E90468A5950A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FF4480B-8C85-FBCB-4970-E90468A5950A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FF4480B-8C85-FBCB-4970-E90468A5950A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10E3CF92-E8DB-41F9-AEE0-DEE358E6E258}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10E3CF92-E8DB-41F9-AEE0-DEE358E6E258}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10E3CF92-E8DB-41F9-AEE0-DEE358E6E258}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10E3CF92-E8DB-41F9-AEE0-DEE358E6E258}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A66AD08E-B4D3-F45C-E57A-B098D03FAC77} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{8CFE5827-1253-ED21-5EDA-E7A2DBF8B760} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{4FF4480B-8C85-FBCB-4970-E90468A5950A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{10E3CF92-E8DB-41F9-AEE0-DEE358E6E258} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2DC08996-FD90-4AFD-8F80-C1E23BA5A54C}
+	EndGlobalSection
+EndGlobal
