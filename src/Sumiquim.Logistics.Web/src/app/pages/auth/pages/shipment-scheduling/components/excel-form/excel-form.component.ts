@@ -60,7 +60,7 @@ export class ExcelFormComponent implements OnInit, OnDestroy {
       );
   }
 
-  readExcelFile(file:any): Observable<IShippingScheduling[]> {
+  readExcelFile(file: any): Observable<IShippingScheduling[]> {
 
     return new Observable((observer) => {
       var shippings: IShippingScheduling[] = [];
@@ -68,7 +68,7 @@ export class ExcelFormComponent implements OnInit, OnDestroy {
       fileReader.readAsBinaryString(file);
   
       fileReader.onload = (e) => {
-        var workbook = XLSX.read(fileReader.result, { type: 'binary'});
+        var workbook = XLSX.read(fileReader.result, { type: 'binary' });
         var sheetNames = workbook.SheetNames;
         var dataSheetItems = XLSX.utils.sheet_to_json(workbook.Sheets[sheetNames[0]]);
 
@@ -78,59 +78,65 @@ export class ExcelFormComponent implements OnInit, OnDestroy {
           var batch = (row as any)?.['LOTE']?.toString().trim() ?? null;
           var item = (row as any)?.['ITEM']?.toString().trim() ?? null;
 
-          if(!client){
+          if(!client) {
             this.pushError("Registro no tiene un cliente [RAZÓN SOCIAL]", client, batch, item);
             return;
           }
 
-          if(!batch){
+          if(!batch) {
             this.pushError("Registro no tiene un lote [LOTE]", client, batch, item);
             return;
           }
 
-          if(!item){
+          if(!item) {
             this.pushError("Registro no tiene un item [ITEM]", client, batch, item);
             return;
           }
 
           var purchaseOrder = (row as any)?.['ORDEN DE COMPRA']?.toString().trim() ?? null;
-          if(!purchaseOrder){
+          if(!purchaseOrder) {
             this.pushError("Registro no tiene una orden de compra [ORDEN DE COMPRA]", client, batch, item);
             return;
           }
 
           var code = (row as any)?.['CODIGO']?.toString().trim() ?? null;
-          if(!code){
+          if(!code) {
             this.pushError("Registro no tiene un codigo [CODIGO]", client, batch, item);
             return;
           }
   
           const quantity = (row as any)?.['PESO NETO']?.toString().trim() ?? null;
-          if(!quantity){
+          if(!quantity) {
             this.pushError("Registro no tiene un peso neto [PESO NETO]", client, batch, item);
             return;
           }
 
           const warehouse = (row as any)?.['BODEGA']?.toString().trim() ?? null;
-          if(!warehouse){
+          if(!warehouse) {
             this.pushError("Registro no tiene una bodega [BODEGA]", client, batch, item);
             return;
           }
 
+          const location = (row as any)?.['UBICACIÓN']?.toString().trim() ?? null;
+          if (!location) {
+            this.pushError("Registro no tiene una ubicación [UBICACIÓN]", client, batch, item);
+            return;
+          }
+
           const address = (row as any)?.['DIRECCIÓN']?.toString().trim() ?? null;
-          if(!address){
+          if(!address) {
             this.pushError("Registro no tiene una dirección [DIRECCIÓN]", client, batch, item);
             return;
           }
 
           const city = (row as any)?.['CIUDAD']?.toString().trim() ?? null;
-          if(!city){
+          if(!city) {
             this.pushError("Registro no tiene una ciudad [CIUDAD]", client, batch, item);
             return;
           }
 
           const salesAdvisor = (row as any)?.['COMERCIAL']?.toString().trim() ?? null;
-          if(!salesAdvisor){
+          if(!salesAdvisor) {
             this.pushError("Registro no tiene un comercial [COMERCIAL]", client, batch, item);
             return;
           }
@@ -140,9 +146,10 @@ export class ExcelFormComponent implements OnInit, OnDestroy {
 
           var shipping: IShippingScheduling = {
             id: '',
-            date : this.data.date,
+            date: this.data.date,
             client,
             batch,
+            location,
             item,
             purchaseOrder,
             code,
@@ -182,7 +189,7 @@ export class ExcelFormComponent implements OnInit, OnDestroy {
     })
   }
 
-  onSubmit(event: Event):void {
+  onSubmit(event: Event): void {
     event.preventDefault()
     this.loaderService.show();
     this.shippingSchedulingService.saveBatch(this.shippings)
@@ -190,7 +197,7 @@ export class ExcelFormComponent implements OnInit, OnDestroy {
         this.loaderService.hide();
         this.notificationService.toast("La información se almacenó exitosamente", "success");
         this.dialogRef.close(res);
-      }).catch(error=>{
+      }).catch(error => {
         console.log("Error => ", error);
         this.loaderService.hide();
         this.notificationService.toast('Se produjo un error. Intente nuevamente.', 'error');

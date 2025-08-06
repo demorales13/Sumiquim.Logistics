@@ -1,6 +1,6 @@
 import { IClient, ICourierCompany, IItem } from "..";
 
-export interface IShipping{
+export interface IShipping {
   id: string;
   item: IItem | null;
   client: IClient | null;
@@ -13,11 +13,12 @@ export interface IShipping{
   notes: string;
 }
 
-export interface IShippingScheduling{
+export interface IShippingScheduling {
   id: string;
   date: number;
   client: string | null;
   batch: string | null;
+  location: string | null;
   item: string | null;
   purchaseOrder: string | null;
   code: string | null;
