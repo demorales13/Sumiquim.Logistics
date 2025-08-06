@@ -1,12 +1,12 @@
 ﻿using Carter;
 
+using MediatR;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Routing;
 
-using Sumiquim.Logistics.Application.Abstractions;
-using Sumiquim.Logistics.Domain.Entities.Users;
+using Sumiquim.Logistics.Application.Helpers;
 
 namespace Sumiquim.Logistics.Application.Authentication.Login;
 
@@ -14,21 +14,14 @@ public class LoginEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/auth/login", async (UserManager<SumiquimUser> userManager, IJwtTokenGenerator tokenGenerator, LoginRequest request) =>
+        app.MapPost("/auth/login", 
+            async (LoginCommand command, ISender sender) =>
         {
-            var user = await userManager.FindByEmailAsync(request.Email);
-            if (user == null || !await userManager.CheckPasswordAsync(user, request.Password))
-            {
-                return Results.Unauthorized();
-            }
+            var result = await sender.Send(command);
 
-            var roles = await userManager.GetRolesAsync(user);
-            var token = tokenGenerator.GenerateToken(user, roles);
-
-            return Results.Ok(new { Token = token });
+            return ResponseHelper.Ok(result);
         })
         .WithSummary("Login user")
         .WithDescription("Logs in a user and returns a JWT token.");
     }
 }
-

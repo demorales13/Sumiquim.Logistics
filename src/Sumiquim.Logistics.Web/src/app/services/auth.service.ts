@@ -1,76 +1,72 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import firebase from 'firebase/compat/app';
+import { catchError, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 import { ICredentials } from '../models/frontend';
-import { IUser } from '../models/backend';
-
+import { IAppHttpResponse, IUser } from '../models/backend';
+import { AppHttpServiceResponse } from '../classes/AppHttpServiceResponse.class';
+import { environment } from '@src/environments/environment';
+import { ROLES } from '@app/data/roles.const';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService extends AppHttpServiceResponse {
 
-  private USER_KEY = "sumiquimLogisticaApp"
-  user$ : Observable<firebase.User | null>;
-  profile$ : BehaviorSubject<IUser | null>;
+  private USER_KEY = "sumiquim_logistica_app"
+  private _profile$: BehaviorSubject<IUser | null>;
 
-  constructor(
-    private fs: AngularFirestore,
-    private afauth: AngularFireAuth) {
-    this.user$ = afauth.authState;
-    this.profile$ = new BehaviorSubject( this.getProfile() );
+  constructor(http: HttpClient) {
+    super(http)
+    this._profile$ = new BehaviorSubject<IUser | null>(this.getProfile());
   }
 
   login(user: ICredentials) {
-    const { email, password } = user;
-    return this.afauth.signInWithEmailAndPassword(email, password);
-  }
+    const url = `${environment.baseUrl}/auth/login`;
 
-  logout() {
-    return this.afauth.signOut().finally(() =>{
-      this.removeProfile();
-    });
-  }
-
-  profile(id: string) {
-    return this.fs.doc<IUser>(`users/${id}`).valueChanges()
+    return this.http
+      .post<IAppHttpResponse<IUser>>(url, user)
       .pipe(
-        tap(res => {
-          if(res) {
-            this.setProfile(res);
-          }
+        tap((response) => {
+          this.setProfile(response.data as IUser);
         })
       )
+      .pipe(catchError((error) => this.handleHttpError(error)));
   }
 
-  private setProfile(user: IUser){
+  logout(): void {
+    this.removeProfile();
+  }
+
+  public get profile$(): Observable<IUser | null> {
+    return this._profile$.asObservable();
+  }
+
+  public get profile(): IUser | null {
+    return this._profile$.value;
+  }
+
+  private setProfile(user: IUser): void {
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
-    this.profile$.next(this.getProfile());
+    this._profile$.next(user);
   }
 
   private getProfile(): IUser | null {
-    var user = localStorage.getItem(this.USER_KEY);
-    if(!user){
-      return null;
-    }
-    return JSON.parse(user);
+    const userJson = localStorage.getItem(this.USER_KEY);
+    return userJson ? JSON.parse(userJson) : null;
   }
 
   private removeProfile(): void {
-    localStorage.clear();
-    this.profile$.next(this.getProfile());
+    localStorage.removeItem(this.USER_KEY);
+    this._profile$.next(null);
   }
 
-  get isLogistics(): boolean {
-    return this.profile$.value?.role == "logistica";
+  get isPlanner(): boolean {
+    return this._profile$.value?.role == ROLES.PLANNER;
   }
 
-  get isUser(): boolean {
-    return this.profile$.value?.role == "usuario";
+  get isOperator(): boolean {
+    return this._profile$.value?.role == ROLES.OPERATOR;
   }
 }

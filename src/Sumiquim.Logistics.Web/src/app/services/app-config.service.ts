@@ -6,18 +6,18 @@ import { AuthService } from './auth.service';
 export class AppConfigService {
 
   constructor(private authService: AuthService,
-    private rolesService: NgxRolesService) {}
+    private rolesService: NgxRolesService) { }
 
   load() {
     this.rolesService
-    .addRoles({
-      'User': () => {
-        return this.authService.isUser;
-      },
-      'Logistics': () => {
-        return this.authService.isLogistics;
-      }
-    });
+      .addRoles({
+        'User': () => {
+          return this.authService.isOperator;
+        },
+        'Logistics': () => {
+          return this.authService.isPlanner;
+        }
+      });
   }
 
 }

@@ -10,7 +10,6 @@ import { takeUntil } from 'rxjs/operators';
 import { FormComponent } from '../../components/form/form.component';
 import { ExcelFormComponent } from '../../components/excel-form/excel-form.component';
 import { EmailService } from '@app/services/email.service';
-import { IncidentFormComponent } from '../../components/incident-form/incident-form.component';
 
 @Component({
   selector: 'app-admon',
@@ -33,7 +32,7 @@ export class AdmonComponent implements OnInit, OnDestroy {
     this.subscriptions.complete();
   }
 
-  get ShippingLines(): IShippingScheduling[] { 
+  get ShippingLines(): IShippingScheduling[] {
     return this.shippingSchedulingService.ShippingLines;
   }
 
@@ -42,7 +41,7 @@ export class AdmonComponent implements OnInit, OnDestroy {
     this.getShippings();
   }
 
-  getShippings(){
+  getShippings() {
     this.loaderService.show();
     this.shippingSchedulingService.getByDate(this.date)
       .pipe(takeUntil(this.subscriptions))
@@ -55,24 +54,9 @@ export class AdmonComponent implements OnInit, OnDestroy {
       });
   }
 
-  onDateChanged(event:Value):void {
+  onDateChanged(event: Value): void {
     this.date = event as number;
     this.getShippings();
-  }
-
-  onAddOrder(): void {
-    const dialogRef = this.dialog.open(FormComponent, {
-      width: '550px',
-      data: {
-        date: this.date
-      }
-    })
-
-    dialogRef.afterClosed()
-      .pipe(takeUntil(this.subscriptions))
-      .subscribe(result => {
-        this.getShippings();
-      })
   }
 
   onAddExcelFile(): void {
@@ -92,14 +76,10 @@ export class AdmonComponent implements OnInit, OnDestroy {
   }
 
   sendScheduledNotificationEmail(): void {
-    this.emailService
-      .sendScheduledNotificationEmail()
+    this.emailService.sendScheduledNotificationEmail()
       .pipe(takeUntil(this.subscriptions))
-      .subscribe( result => {
+      .subscribe(result => {
         console.log("SendScheduledNotificationEmail => ", result);
-      }, 
-      error => {
-        console.log("ERROR [SendScheduledNotificationEmail] => ", error);
       });
   }
 
@@ -116,30 +96,34 @@ export class AdmonComponent implements OnInit, OnDestroy {
       })
   }
 
-  onShippingDeleteClick(shipping: IShippingScheduling): void {
+  onShippingRemoveClick(shipping: IShippingScheduling): void {
     this.notificationService.confirm("", "Está seguro(a) que desea eliminar este registro")
-    .then(response => {
-      if(response.isConfirmed){
-        this.shippingSchedulingService.delete(shipping);
-      }
-    })
-  }
+      .then(response => {
+        if (response.isConfirmed) {
+          this.shippingSchedulingService.remove(shipping)
+            .pipe(takeUntil(this.subscriptions))
+            .subscribe(res => {
 
-  onShippingIncidentClick(shipping: IShippingScheduling): void {
-    const dialogRef = this.dialog.open(IncidentFormComponent, {
-      width: '550px',
-      data: shipping
-    })
-
-    dialogRef.afterClosed()
-      .pipe(takeUntil(this.subscriptions))
-      .subscribe(result => {
-        this.getShippings();
+            }, error => {
+              console.log("Error => ", error);
+              this.notificationService.toast('Se produjo un error. Intente nuevamente.', 'error');
+            });
+        }
       })
   }
 
-  onCheckEmails(): void { 
-    this.shippingSchedulingService.refreshCheckEmailNotification();
-  } 
+  onCheckEmails(): void {
+    this.emailService.sendScheduledNotificationEmail()
+      .pipe(takeUntil(this.subscriptions))
+      .subscribe(result => {
+        console.log("SendScheduledNotificationEmail => ", result);
+      });
+
+    this.emailService.sendShipmentNotificationEmail()
+      .pipe(takeUntil(this.subscriptions))
+      .subscribe(result => {
+        console.log("sendShipmentNotificationEmail => ", result);
+      });
+  }
 
 }

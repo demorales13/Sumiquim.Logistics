@@ -51,6 +51,12 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
+app.UseCors(builder =>
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader()
+);
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapCarter();
@@ -72,12 +78,6 @@ if (app.Environment.IsDevelopment())
 
     await app.SeedDataAsync();
 }
-
-app.UseCors(builder =>
-    builder.AllowAnyOrigin()
-           .AllowAnyMethod()
-           .AllowAnyHeader()
-);
 
 app.UseHttpsRedirection();
 app.UseCustomExceptionHandler();

@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ROLES } from '@app/data/roles.const';
+import { IUser } from '@app/models/backend';
 import { AuthService } from '@app/services/auth.service';
 import { LoaderService } from '@app/services/loader.service';
 import { NotificationService } from '@app/services/notification.service';
@@ -31,17 +33,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.form = this.fb.group({
       email: [
-        null,
+        'planeador@sumiquim.com',
         {
-          validators:[
+          validators: [
             Validators.required
           ]
         }
       ],
       password: [
-        null,
+        'Planeador123*',
         {
-          validators:[
+          validators: [
             Validators.required
           ]
         }
@@ -50,32 +52,29 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    var credentials = this.form.value;
+    const credentials = this.form.value;
 
     this.loaderService.show();
+
     this.authService.login(credentials)
-      .then(res => {
-        this.loaderService.hide();
-        if(res?.user) {
-          this.authService.profile(res.user?.uid)
-            .pipe(takeUntil(this.subscriptions))
-            .subscribe(res=> {
-              if(res?.role == 'logistica'){
-                this.route.navigate(['/auth/shipment-scheduling/admon']);
-              } else {
-                this.route.navigate(['/auth/shipment-scheduling/view']);
-              }
-            }, error => {
-              this.authService.logout();
-              console.log("Error => ", error);
-              this.loaderService.hide();
-              this.notificationService.toast('Se produjo un error. Intente nuevamente.', 'error');
-            })
+      .pipe(takeUntil(this.subscriptions))
+      .subscribe({
+        next: (response) => {
+          this.loaderService.hide();
+
+          const user = response.data as IUser;
+
+          if (user.role === ROLES.PLANNER) {
+            this.route.navigate(['/auth/shipment-scheduling/admon']);
+          } else {
+            this.route.navigate(['/auth/shipment-scheduling/view']);
+          }
+        },
+        error: (error) => {
+          console.error("Error => ", error);
+          this.loaderService.hide();
+          this.notificationService.toast('Se produjo un error. Intente nuevamente.', 'error');
         }
-      }).catch(error=>{
-        console.log("Error => ", error);
-        this.loaderService.hide();
-        this.notificationService.toast('Se produjo un error. Intente nuevamente.', 'error');
       });
   }
 

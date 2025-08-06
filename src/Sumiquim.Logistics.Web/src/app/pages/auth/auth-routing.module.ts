@@ -9,10 +9,6 @@ const routes: Routes = [
     component: AuthComponent,
     children: [
       {
-        path: 'route',
-        loadChildren: () => import('./pages/route/route.module').then(m => m.RouteModule)
-      },
-      {
         path: 'admon',
         loadChildren: () => import('./pages/admon/admon.module').then(m => m.AdmonModule),
         canActivate: [NgxPermissionsGuard],
@@ -33,7 +29,7 @@ const routes: Routes = [
       },
       {
         path: "static",
-        loadChildren: () => import('./pages/static/static.module').then( m => m.StaticModule)
+        loadChildren: () => import('./pages/static/static.module').then(m => m.StaticModule)
       },
       {
         path: 'converter',

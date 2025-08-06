@@ -5,10 +5,9 @@ import { Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { ITrackHttpError } from '@app/models/backend/app-http-response';
 
-
 @Injectable()
 export class AppHttpServiceResponse {
-    public emailSenderBaseUrl = environment.emailSenderBaseUrl;
+    public emailSenderBaseUrl = environment.baseUrl;
     public isProduction = environment.production;
 
     constructor(protected http: HttpClient) {

@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IClient, ICourierCompany, IItem, IShipping, IShippingScheduling, ShippingStatuses } from '@app/models/backend';
+import { IClient, ICourierCompany, IItem, IShippingScheduling, ShippingStatuses } from '@app/models/backend';
 import { LoaderService } from '@app/services/loader.service';
 import { NotificationService } from '@app/services/notification.service';
 import { ShippingSchedulingService } from '@app/services/shipping-scheduling.service';
@@ -66,7 +66,7 @@ export class ExcelFormComponent implements OnInit, OnDestroy {
       var shippings: IShippingScheduling[] = [];
       let fileReader = new FileReader();
       fileReader.readAsBinaryString(file);
-  
+
       fileReader.onload = (e) => {
         var workbook = XLSX.read(fileReader.result, { type: 'binary' });
         var sheetNames = workbook.SheetNames;
@@ -78,41 +78,41 @@ export class ExcelFormComponent implements OnInit, OnDestroy {
           var batch = (row as any)?.['LOTE']?.toString().trim() ?? null;
           var item = (row as any)?.['ITEM']?.toString().trim() ?? null;
 
-          if(!client) {
+          if (!client) {
             this.pushError("Registro no tiene un cliente [RAZÓN SOCIAL]", client, batch, item);
             return;
           }
 
-          if(!batch) {
+          if (!batch) {
             this.pushError("Registro no tiene un lote [LOTE]", client, batch, item);
             return;
           }
 
-          if(!item) {
+          if (!item) {
             this.pushError("Registro no tiene un item [ITEM]", client, batch, item);
             return;
           }
 
           var purchaseOrder = (row as any)?.['ORDEN DE COMPRA']?.toString().trim() ?? null;
-          if(!purchaseOrder) {
+          if (!purchaseOrder) {
             this.pushError("Registro no tiene una orden de compra [ORDEN DE COMPRA]", client, batch, item);
             return;
           }
 
           var code = (row as any)?.['CODIGO']?.toString().trim() ?? null;
-          if(!code) {
+          if (!code) {
             this.pushError("Registro no tiene un codigo [CODIGO]", client, batch, item);
             return;
           }
-  
+
           const quantity = (row as any)?.['PESO NETO']?.toString().trim() ?? null;
-          if(!quantity) {
+          if (!quantity) {
             this.pushError("Registro no tiene un peso neto [PESO NETO]", client, batch, item);
             return;
           }
 
           const warehouse = (row as any)?.['BODEGA']?.toString().trim() ?? null;
-          if(!warehouse) {
+          if (!warehouse) {
             this.pushError("Registro no tiene una bodega [BODEGA]", client, batch, item);
             return;
           }
@@ -124,19 +124,19 @@ export class ExcelFormComponent implements OnInit, OnDestroy {
           }
 
           const address = (row as any)?.['DIRECCIÓN']?.toString().trim() ?? null;
-          if(!address) {
+          if (!address) {
             this.pushError("Registro no tiene una dirección [DIRECCIÓN]", client, batch, item);
             return;
           }
 
           const city = (row as any)?.['CIUDAD']?.toString().trim() ?? null;
-          if(!city) {
+          if (!city) {
             this.pushError("Registro no tiene una ciudad [CIUDAD]", client, batch, item);
             return;
           }
 
           const salesAdvisor = (row as any)?.['COMERCIAL']?.toString().trim() ?? null;
-          if(!salesAdvisor) {
+          if (!salesAdvisor) {
             this.pushError("Registro no tiene un comercial [COMERCIAL]", client, batch, item);
             return;
           }
@@ -145,7 +145,7 @@ export class ExcelFormComponent implements OnInit, OnDestroy {
           const carrierCompany = (row as any)?.['TRANSPORTADORA']?.toString().trim() ?? '';
 
           var shipping: IShippingScheduling = {
-            id: '',
+            shippingSchedulingId: '',
             date: this.data.date,
             client,
             batch,
@@ -165,9 +165,9 @@ export class ExcelFormComponent implements OnInit, OnDestroy {
             schedulingNotification: ShippingStatuses.Pending,
             shipmentNotification: ShippingStatuses.Pending
           };
-  
+
           shippings.push(shipping);
- 
+
         });
         observer.next(shippings);
         observer.complete();
@@ -191,17 +191,17 @@ export class ExcelFormComponent implements OnInit, OnDestroy {
 
   onSubmit(event: Event): void {
     event.preventDefault()
-    this.loaderService.show();
-    this.shippingSchedulingService.saveBatch(this.shippings)
-      .then(res => {
-        this.loaderService.hide();
-        this.notificationService.toast("La información se almacenó exitosamente", "success");
-        this.dialogRef.close(res);
-      }).catch(error => {
-        console.log("Error => ", error);
-        this.loaderService.hide();
-        this.notificationService.toast('Se produjo un error. Intente nuevamente.', 'error');
-      });
+    // this.loaderService.show();
+    // this.shippingSchedulingService.saveBatch(this.shippings)
+    //   .then(res => {
+    //     this.loaderService.hide();
+    //     this.notificationService.toast("La información se almacenó exitosamente", "success");
+    //     this.dialogRef.close(res);
+    //   }).catch(error => {
+    //     console.log("Error => ", error);
+    //     this.loaderService.hide();
+    //     this.notificationService.toast('Se produjo un error. Intente nuevamente.', 'error');
+    //   });
   }
 
   onClose(): void {

@@ -1,11 +1,8 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IClient, IShipping, IShippingScheduling, ShippingStatuses } from '@app/models/backend';
+import { IShippingScheduling } from '@app/models/backend';
 import { ControlItem } from '@app/models/frontend';
-import { ClientService } from '@app/services/client.service';
-import { CourierCompanyService } from '@app/services/courier-company.service';
-import { ItemService } from '@app/services/item.service';
 import { LoaderService } from '@app/services/loader.service';
 import { NotificationService } from '@app/services/notification.service';
 import { ShippingSchedulingService } from '@app/services/shipping-scheduling.service';
@@ -28,13 +25,10 @@ export class FormComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<FormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IShipping,
+    @Inject(MAT_DIALOG_DATA) public data: IShippingScheduling,
     private loaderService: LoaderService,
     private notificationService: NotificationService,
-    private clientService: ClientService,
-    private shippingSchedulingService: ShippingSchedulingService,
-    private courierService: CourierCompanyService,
-    private itemService: ItemService) { }
+    private shippingSchedulingService: ShippingSchedulingService) { }
 
   ngOnDestroy(): void {
     this.subscriptions.next(null);
@@ -45,16 +39,16 @@ export class FormComponent implements OnInit, OnDestroy {
     this.initForm();
   }
 
-  initForm():void{
+  initForm(): void {
     this.form = this.fb.group({
-      id: [
+      shippingSchedulingId: [
         null
       ],
       batch: [
         null,
         {
           updateOn: 'blur',
-          validators:[
+          validators: [
             Validators.required
           ]
         }
@@ -63,7 +57,7 @@ export class FormComponent implements OnInit, OnDestroy {
         null,
         {
           updateOn: 'blur',
-          validators:[
+          validators: [
             Validators.required
           ]
         }
@@ -72,7 +66,7 @@ export class FormComponent implements OnInit, OnDestroy {
         null,
         {
           updateOn: 'blur',
-          validators:[
+          validators: [
             Validators.required
           ]
         }
@@ -81,7 +75,7 @@ export class FormComponent implements OnInit, OnDestroy {
         null,
         {
           updateOn: 'blur',
-          validators:[
+          validators: [
             Validators.required
           ]
         }
@@ -146,6 +140,12 @@ export class FormComponent implements OnInit, OnDestroy {
           updateOn: 'blur'
         }
       ],
+      location: [
+        null,
+        {
+          updateOn: 'blur'
+        }
+      ],
       schedulingNotification: [
         null,
         {
@@ -163,10 +163,10 @@ export class FormComponent implements OnInit, OnDestroy {
     var formValues: any = { ...this.data };
     this.form.patchValue(formValues);
   }
-  
-  onSubmit():void {
 
-    if(this.form.invalid) {
+  onSubmit(): void {
+
+    if (this.form.invalid) {
       markFormGroupTouched(this.form);
       return;
     }
@@ -177,12 +177,12 @@ export class FormComponent implements OnInit, OnDestroy {
 
     console.log("FORM => ", shipping);
     this.loaderService.show();
-    this.shippingSchedulingService.save(shipping)
-      .then(res => {
+    this.shippingSchedulingService.Update(shipping)
+      .pipe(takeUntil(this.subscriptions))
+      .subscribe(res => {
         this.loaderService.hide();
-        this.notificationService.toast("La información se almacenó exitosamente", "success");
         this.dialogRef.close(res);
-      }).catch(error=>{
+      }, error => {
         console.log("Error => ", error);
         this.loaderService.hide();
         this.notificationService.toast('Se produjo un error. Intente nuevamente.', 'error');

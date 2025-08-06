@@ -13,22 +13,22 @@ export class ShippingLineAdmonComponent implements OnInit {
   @Output() deleteClicked = new EventEmitter<IShippingScheduling>();
   @Output() incidentClicked = new EventEmitter<IShippingScheduling>();
 
-  viewFooter!:boolean;
+  viewFooter!: boolean;
 
-  get shippingLineBackground() : string { 
-    if (this.shippingLine.carrierCompany?.toLowerCase() == "sumiquim"){
+  get shippingLineBackground(): string {
+    if (this.shippingLine.carrierCompany?.toLowerCase() == "sumiquim") {
       return "sumiquim";
     }
 
-    if (this.shippingLine.carrierCompany?.toLowerCase() == "aldia paqueteo"){
+    if (this.shippingLine.carrierCompany?.toLowerCase() == "aldia paqueteo") {
       return "aldia-paqueteo";
     }
 
-    if (this.shippingLine.carrierCompany?.toLowerCase() == "aldia masivo"){
+    if (this.shippingLine.carrierCompany?.toLowerCase() == "aldia masivo") {
       return "aldia-masivo";
     }
 
-    if (this.shippingLine.carrierCompany?.toLowerCase() == "unilever"){
+    if (this.shippingLine.carrierCompany?.toLowerCase() == "unilever") {
       return "unilever";
     }
 
@@ -40,19 +40,15 @@ export class ShippingLineAdmonComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onViewFooter():void {
+  onViewFooter(): void {
     this.viewFooter = !this.viewFooter;
   }
 
-  onDeleteClick():void {
+  onDeleteClick(): void {
     this.deleteClicked.emit(this.shippingLine);
   }
 
-  onEditClick():void {
+  onEditClick(): void {
     this.editClicked.emit(this.shippingLine);
-  }
-
-  onIncidentClick():void { 
-    this.incidentClicked.emit(this.shippingLine);
   }
 }

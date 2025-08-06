@@ -1,4 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HandlebarsDotNet;
+
+using Microsoft.EntityFrameworkCore;
+
+using Org.BouncyCastle.Asn1;
 
 using Sumiquim.Logistics.Domain.Abstractions;
 using Sumiquim.Logistics.Infrastructure.DbContext;
@@ -30,6 +34,16 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         if (entity is null) throw new ArgumentNullException(nameof(entity));
         if (edited is null) throw new ArgumentNullException(nameof(edited));
+
+        try
+        {
+            DbContext.Attach(entity);
+        }
+        catch (Exception ex)
+        {
+            DbContext.Entry(entity).State = EntityState.Detached;
+            DbContext.Attach(entity);
+        }
 
         DbContext.Entry(entity).CurrentValues.SetValues(edited);
         DbContext.Entry(entity).State = EntityState.Modified;

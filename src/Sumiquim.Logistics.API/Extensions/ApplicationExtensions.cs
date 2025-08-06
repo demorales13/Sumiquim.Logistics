@@ -65,8 +65,8 @@ public static class SerilogConfiguration
 
         services.AddAuthorization(options =>
         {
-            options.AddPolicy("RequireWriteAccess", policy => policy.RequireRole("Planner"));
-            options.AddPolicy("RequireReadAccess", policy => policy.RequireRole("Operator", "Planner"));
+            options.AddPolicy("RequireWriteAccess", policy => policy.RequireRole("Planeador"));
+            options.AddPolicy("RequireReadAccess", policy => policy.RequireRole("Operador", "Planeador"));
         });
 
         services.AddScoped<IdentityDataSeeder>();

@@ -5,16 +5,22 @@
     <i class="fas fa-envelope-circle-check" (click)="onCheckEmails()"></i>
     <i class="fas fa-file-import ms-4" (click)="onAddExcelFile()"></i>
   </div>
-
 </div>
 
 <div class="body">
-  <ng-container *ngFor="let line of ShippingLines | multiFieldOrderBy: ['carrierCompany', 'client', 'item', 'location']: true">
-    <app-shipping-line-admon [shippingLine]="line" 
+  <ng-container
+    *ngFor="
+      let line of ShippingLines
+        | multiFieldOrderBy
+          : ['carrierCompany', 'client', 'item', 'location']
+          : true
+    "
+  >
+    <app-shipping-line-admon
+      [shippingLine]="line"
       (editClicked)="onShippingEditClick($event)"
-      (deleteClicked)="onShippingDeleteClick($event)"
-      (incidentClicked)="onShippingIncidentClick($event)">
+      (deleteClicked)="onShippingRemoveClick($event)"
+    >
     </app-shipping-line-admon>
   </ng-container>
 </div>
-

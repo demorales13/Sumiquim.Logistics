@@ -32,7 +32,7 @@ public class IdentityDataSeeder
             return;
 
         // Roles
-        var roles = new[] { "Planner", "Operator" };
+        var roles = new[] { "Planeador", "Operador" };
 
         foreach (var role in roles)
         {
@@ -43,37 +43,41 @@ public class IdentityDataSeeder
         }
 
         // Planner user
-        var plannerEmail = "planner@sumiquim.com";
+        var plannerEmail = "planeador@sumiquim.com";
         var plannerUser = await _userManager.FindByEmailAsync(plannerEmail);
 
         if (plannerUser == null)
         {
             plannerUser = new SumiquimUser
             {
-                UserName = "planner@sumiquim.com",
+                Name = "Andres",
+                LastName = "Iniesta",
+                UserName = "planeador@sumiquim.com",
                 Email = plannerEmail,
                 EmailConfirmed = true
             };
 
-            await _userManager.CreateAsync(plannerUser, "Planner123*");
-            await _userManager.AddToRoleAsync(plannerUser, "Planner");
+            await _userManager.CreateAsync(plannerUser, "Planeador123*");
+            await _userManager.AddToRoleAsync(plannerUser, "Planeador");
         }
 
         // Operator user
-        var operatorEmail = "operator@sumiquim.com";
+        var operatorEmail = "operador@sumiquim.com";
         var operatorUser = await _userManager.FindByEmailAsync(operatorEmail);
 
         if (operatorUser == null)
         {
             operatorUser = new SumiquimUser
             {
-                UserName = "operator@sumiquim.com",
+                Name = "Xabi",
+                LastName = "Hernandez",
+                UserName = "operador@sumiquim.com",
                 Email = operatorEmail,
                 EmailConfirmed = true
             };
 
-            await _userManager.CreateAsync(operatorUser, "Operator123*");
-            await _userManager.AddToRoleAsync(operatorUser, "Operator");
+            await _userManager.CreateAsync(operatorUser, "Operador123*");
+            await _userManager.AddToRoleAsync(operatorUser, "Operador");
         }
     }
 }

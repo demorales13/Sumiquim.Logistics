@@ -10,7 +10,6 @@ import { ShippingLineAdmonModule } from '../../components/shipping-line-admon/sh
 import { ShippingHeaderAdmonModule } from '../../components/shipping-header-admon/shipping-header-admon.module';
 import { FormModule } from '../../components/form/form.module';
 import { ExcelFormModule } from '../../components/excel-form/excel-form.module';
-import { IncidentFormModule } from '../../components/incident-form/incident-form.module';
 import { PipesModule } from '@app/shared/pipes/pipes.module';
 
 @NgModule({
@@ -24,7 +23,6 @@ import { PipesModule } from '@app/shared/pipes/pipes.module';
     ShippingLineAdmonModule,
     ShippingHeaderAdmonModule,
     FormModule,
-    IncidentFormModule,
     DateModule,
     ButtonModule,
     ExcelFormModule,

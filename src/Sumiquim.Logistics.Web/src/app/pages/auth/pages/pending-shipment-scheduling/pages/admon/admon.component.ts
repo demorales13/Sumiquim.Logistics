@@ -31,7 +31,7 @@ export class AdmonComponent implements OnInit, OnDestroy {
     this.subscriptions.complete();
   }
 
-  get ShippingLines(): IShippingScheduling[] { 
+  get ShippingLines(): IShippingScheduling[] {
     return this.shippingSchedulingService.PendingShippingLines;
   }
 
@@ -40,17 +40,17 @@ export class AdmonComponent implements OnInit, OnDestroy {
     this.getShippings();
   }
 
-  getShippings(){
-    this.loaderService.show();
-    this.shippingSchedulingService.getShipmentNotificationPending()
-      .pipe(takeUntil(this.subscriptions))
-      .subscribe(res => {
-        this.loaderService.hide();
-      }, error => {
-        console.log("Error => ", error);
-        this.loaderService.hide();
-        this.notificationService.toast('Se produjo un error. Intente nuevamente.', 'error');
-      });
+  getShippings() {
+    // this.loaderService.show();
+    // this.shippingSchedulingService.getShipmentNotificationPending()
+    //   .pipe(takeUntil(this.subscriptions))
+    //   .subscribe(res => {
+    //     this.loaderService.hide();
+    //   }, error => {
+    //     console.log("Error => ", error);
+    //     this.loaderService.hide();
+    //     this.notificationService.toast('Se produjo un error. Intente nuevamente.', 'error');
+    //   });
   }
 
   onShippingEditClick(shipping: IShippingScheduling): void {

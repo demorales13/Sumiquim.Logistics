@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IShipping, IShippingScheduling } from '@app/models/backend';
+import { IShippingScheduling } from '@app/models/backend';
 import { LoaderService } from '@app/services/loader.service';
 import { NotificationService } from '@app/services/notification.service';
 import { ShippingSchedulingService } from '@app/services/shipping-scheduling.service';
@@ -23,7 +23,6 @@ export class DisplayComponent implements OnInit, OnDestroy {
     private loaderService: LoaderService,
     private notificationService: NotificationService,) { }
 
-
   ngOnDestroy(): void {
     this.subscriptions.next(null);
     this.subscriptions.complete();
@@ -34,11 +33,11 @@ export class DisplayComponent implements OnInit, OnDestroy {
     this.getShippings(this.today);
   }
 
-  getShippings(date: number){
+  getShippings(date: number) {
     this.shippingSchedulingService.getByDate(date)
       .pipe(takeUntil(this.subscriptions))
       .subscribe(res => {
-        this.shippingLines = res.sort((a,b) => this.orderShippingByClientName(a,b) );
+        this.shippingLines = res as IShippingScheduling[];
         this.loaderService.hide();
       }, error => {
         console.log("Error => ", error);
@@ -47,20 +46,20 @@ export class DisplayComponent implements OnInit, OnDestroy {
       });
   }
 
-  orderShippingByClientName( a: IShippingScheduling, b: IShippingScheduling ) {
+  orderShippingByClientName(a: IShippingScheduling, b: IShippingScheduling) {
     var an = a.client as string;
     var bn = b.client as string;
 
-    if ( an < bn ){
+    if (an < bn) {
       return -1;
     }
-    if ( an < bn ){
+    if (an < bn) {
       return 1;
     }
     return 0;
   }
 
-  onDateChanged(event:Value):void {
+  onDateChanged(event: Value): void {
     this.getShippings(event as number);
   }
 

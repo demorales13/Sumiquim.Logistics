@@ -43,6 +43,25 @@ public class ExceptionHandlingMiddleware
 
             await context.Response.WriteAsJsonAsync(problemDetails);
         }
+        catch (AuthenticationException ex)
+        {
+            var problemDetails = new ProblemDetails
+            {
+                Status = StatusCodes.Status401Unauthorized,
+                Type = "AuthenticationValidation",
+                Title = "AuthenticationValidation error",
+                Detail = "No se pudo validar las credenciales del usuario",
+            };
+
+            if (ex.Errors is not null)
+            {
+                problemDetails.Extensions["errors"] = ex.Errors;
+            }
+
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+
+            await context.Response.WriteAsJsonAsync(problemDetails);
+        }
         catch (ValidationException ex)
         {
             var problemDetails = new ProblemDetails

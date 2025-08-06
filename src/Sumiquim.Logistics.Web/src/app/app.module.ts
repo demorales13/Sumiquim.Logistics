@@ -6,20 +6,17 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDateFormats, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { HttpClientModule } from '@angular/common/http';
-
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 // Firebase
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireModule } from '@angular/fire/compat';
-import { environment } from '@src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { AppConfigService } from './services/app-config.service';
-
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 const APP_DATE_FORMAT: MatDateFormats = {
   parse: {
@@ -55,7 +52,6 @@ export function servicesOnRun(config: AppConfigService) {
   return () => config.load();
 }
 
-
 @NgModule({
   declarations: [
     AppComponent
@@ -63,7 +59,6 @@ export function servicesOnRun(config: AppConfigService) {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AppRoutingModule,
     AngularFireAuthModule,
@@ -77,6 +72,11 @@ export function servicesOnRun(config: AppConfigService) {
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-CO' },
     { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMAT },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
     AppConfigService,
     {
       provide: APP_INITIALIZER,
