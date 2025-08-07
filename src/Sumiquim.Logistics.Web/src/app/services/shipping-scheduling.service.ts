@@ -84,6 +84,17 @@ export class ShippingSchedulingService extends AppHttpServiceResponse {
       );
   }
 
+  createFromExcel(file: File): Observable<IAppHttpResponse<any> | ITrackHttpError> {
+    var url = `${environment.baseUrl}/shipping-scheduling/excel/create`;
+
+    const formData: FormData = new FormData();
+    formData.append('File', file, file.name);
+
+    return this.http
+      .post<IAppHttpResponse<any>>(url, formData)
+      .pipe(catchError((error) => this.handleHttpError(error)));
+  }
+
   formatDate(date: number): number {
     const d = new Date(date);
     let month = "" + (d.getMonth() + 1);

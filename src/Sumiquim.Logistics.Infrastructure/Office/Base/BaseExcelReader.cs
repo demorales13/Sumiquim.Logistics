@@ -143,8 +143,10 @@ public abstract class BaseExcelReader<T> where T : class, new()
             var prop = typeof(T).GetProperty(requiredProp);
             var value = prop?.GetValue(entity);
 
+            var columnName = GetColumnMappings().FirstOrDefault(x => x.Value == requiredProp).Key;
+
             if (value == null || (value is string s && string.IsNullOrWhiteSpace(s)))
-                AddError(rowIndex, requiredProp, $"El campo '{requiredProp}' es obligatorio.");
+                AddError(rowIndex, columnName, $"El campo es obligatorio.");
         }
     }
 

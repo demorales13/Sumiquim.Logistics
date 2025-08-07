@@ -17,7 +17,7 @@ public class CreateShippingSchedulingFromExcelEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/shipping-scheduling/create/excel",
+        app.MapPost("/shipping-scheduling/excel/create",
         async ([FromForm] CreateShippingSchedulingFromExcelCommand command, ISender sender) =>
         {
             if (command?.File == null || command?.File?.Length == 0)
