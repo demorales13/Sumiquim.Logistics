@@ -1,4 +1,5 @@
 ﻿using Sumiquim.Logistics.Domain.Entities.ShippingSchedulings;
+using Microsoft.Data.SqlClient;
 
 namespace Sumiquim.Logistics.Infrastructure.Repositories
 {
@@ -9,5 +10,6 @@ namespace Sumiquim.Logistics.Infrastructure.Repositories
         Task<IEnumerable<ShippingScheduling>?> GetPendingSchedulingNotificationAsync(CancellationToken cancellationToken);
         Task<IEnumerable<ShippingScheduling>?> GetPendingShipmentNotificationAsync(CancellationToken cancellationToken);
         Task<ShippingScheduling?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+        Task<IEnumerable<ShippingScheduling>?> GetAsync(string sql, SqlParameter[] parameters, CancellationToken cancellationToken);
     }
 }

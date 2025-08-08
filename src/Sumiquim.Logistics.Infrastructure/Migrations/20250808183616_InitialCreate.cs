@@ -12,14 +12,26 @@ namespace Sumiquim.Logistics.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "tre");
-
-            migrationBuilder.EnsureSchema(
                 name: "security");
 
             migrationBuilder.CreateTable(
-                name: "hola",
-                schema: "tre",
+                name: "Roles",
+                schema: "security",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShippingScheduling",
                 columns: table => new
                 {
                     ShippingSchedulingId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -44,23 +56,7 @@ namespace Sumiquim.Logistics.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_hola", x => x.ShippingSchedulingId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Roles",
-                schema: "security",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Roles", x => x.Id);
+                    table.PrimaryKey("PK_ShippingScheduling", x => x.ShippingSchedulingId);
                 });
 
             migrationBuilder.CreateTable(
@@ -260,12 +256,11 @@ namespace Sumiquim.Logistics.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "hola",
-                schema: "tre");
-
-            migrationBuilder.DropTable(
                 name: "RoleClaims",
                 schema: "security");
+
+            migrationBuilder.DropTable(
+                name: "ShippingScheduling");
 
             migrationBuilder.DropTable(
                 name: "UserClaims",

@@ -9,8 +9,6 @@ internal sealed class ShippingSchedulingConfiguration : IEntityTypeConfiguration
 {
     public void Configure(EntityTypeBuilder<ShippingScheduling> builder)
     {
-        builder.ToTable("hola", "tre");
-
         builder.HasKey(x => x.ShippingSchedulingId);
 
         builder.Property(x => x.Address)

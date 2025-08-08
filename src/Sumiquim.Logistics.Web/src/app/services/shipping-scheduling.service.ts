@@ -54,6 +54,42 @@ export class ShippingSchedulingService extends AppHttpServiceResponse {
       );
   }
 
+  public getPendingShippingLines(): Observable<IShippingScheduling[] | ITrackHttpError> {
+    const url = `${environment.baseUrl}/shipping-scheduling`;
+    let params = new HttpParams();
+    params = params.set('shipmentNotification', ShippingStatuses.Pending);
+    return this.http
+      .get<IAppHttpResponse<IShippingScheduling[]>>(url, { params })
+      .pipe(
+        map(
+          (response) => response.data ?? []
+        ),
+        tap((list) => (this._pendingShippingLines = list)),
+        catchError((error) => this.handleHttpError(error))
+      );
+  }
+
+  public get(filters: { [key: string]: any }): Observable<IShippingScheduling[] | ITrackHttpError> {
+    const url = `${environment.baseUrl}/shipping-scheduling`;
+    let params = new HttpParams();
+
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && value !== '') {
+        params = params.set(key, value.toString());
+      }
+    });
+
+    return this.http
+      .get<IAppHttpResponse<IShippingScheduling[]>>(url, { params })
+      .pipe(
+        map(
+          (response) => response.data ?? []
+        ),
+        tap((list) => (this._shippingLines = list)),
+        catchError((error) => this.handleHttpError(error))
+      );
+  }
+
   public Update(item: IShippingScheduling) {
     const url = `${environment.baseUrl}/shipping-scheduling/${item.shippingSchedulingId}`;
 

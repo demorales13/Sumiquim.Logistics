@@ -12,7 +12,7 @@ using Sumiquim.Logistics.Infrastructure.DbContext;
 namespace Sumiquim.Logistics.Infrastructure.Migrations
 {
     [DbContext(typeof(SumiquimContext))]
-    [Migration("20250805050758_InitialCreate")]
+    [Migration("20250808183616_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -206,7 +206,7 @@ namespace Sumiquim.Logistics.Infrastructure.Migrations
 
                     b.HasKey("ShippingSchedulingId");
 
-                    b.ToTable("hola", "tre");
+                    b.ToTable("ShippingScheduling");
                 });
 
             modelBuilder.Entity("Sumiquim.Logistics.Domain.Entities.Users.SumiquimRole", b =>

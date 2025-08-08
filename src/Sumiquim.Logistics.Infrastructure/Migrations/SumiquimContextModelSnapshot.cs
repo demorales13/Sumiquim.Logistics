@@ -203,7 +203,7 @@ namespace Sumiquim.Logistics.Infrastructure.Migrations
 
                     b.HasKey("ShippingSchedulingId");
 
-                    b.ToTable("hola", "tre");
+                    b.ToTable("ShippingScheduling");
                 });
 
             modelBuilder.Entity("Sumiquim.Logistics.Domain.Entities.Users.SumiquimRole", b =>

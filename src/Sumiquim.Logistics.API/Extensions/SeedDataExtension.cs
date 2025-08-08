@@ -43,40 +43,40 @@ public class IdentityDataSeeder
         }
 
         // Planner user
-        var plannerEmail = "planeador@sumiquim.com";
+        var plannerEmail = "jlroman@sumiquim.com";
         var plannerUser = await _userManager.FindByEmailAsync(plannerEmail);
 
         if (plannerUser == null)
         {
             plannerUser = new SumiquimUser
             {
-                Name = "Andres",
-                LastName = "Iniesta",
-                UserName = "planeador@sumiquim.com",
+                Name = "Jessica",
+                LastName = "Roman",
+                UserName = "jlroman@sumiquim.com",
                 Email = plannerEmail,
                 EmailConfirmed = true
             };
 
-            await _userManager.CreateAsync(plannerUser, "Planeador123*");
+            await _userManager.CreateAsync(plannerUser, "Sumiquim123*");
             await _userManager.AddToRoleAsync(plannerUser, "Planeador");
         }
 
         // Operator user
-        var operatorEmail = "operador@sumiquim.com";
+        var operatorEmail = "demorales@sumiquim.com";
         var operatorUser = await _userManager.FindByEmailAsync(operatorEmail);
 
         if (operatorUser == null)
         {
             operatorUser = new SumiquimUser
             {
-                Name = "Xabi",
-                LastName = "Hernandez",
-                UserName = "operador@sumiquim.com",
+                Name = "David",
+                LastName = "Morales",
+                UserName = "demorales@sumiquim.com",
                 Email = operatorEmail,
                 EmailConfirmed = true
             };
 
-            await _userManager.CreateAsync(operatorUser, "Operador123*");
+            await _userManager.CreateAsync(operatorUser, "Sumiquim123*");
             await _userManager.AddToRoleAsync(operatorUser, "Operador");
         }
     }
