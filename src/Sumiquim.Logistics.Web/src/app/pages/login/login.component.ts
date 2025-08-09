@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.form = this.fb.group({
       email: [
-        'planeador@sumiquim.com',
+        'jlroman@sumiquim.com',
         {
           validators: [
             Validators.required
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
       ],
       password: [
-        'Planeador123*',
+        'Sumiquim123*',
         {
           validators: [
             Validators.required

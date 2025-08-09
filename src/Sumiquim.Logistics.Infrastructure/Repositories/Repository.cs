@@ -22,7 +22,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
         DbContext.Add(entity);
     }
 
-    public void Add(IEnumerable<TEntity> entities, CancellationToken cancellationToken)
+    public void AddRange(IEnumerable<TEntity> entities, CancellationToken cancellationToken)
     {
         if (entities is null) throw new ArgumentNullException(nameof(entities));
         if (!entities.Any()) throw new ArgumentException("Collection cannot be empty", nameof(entities));

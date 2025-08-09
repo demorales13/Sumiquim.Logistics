@@ -1,6 +1,7 @@
 ﻿using Sumiquim.Logistics.Application.Abstractions.Messaging;
 using Sumiquim.Logistics.Domain.Abstractions;
 using Sumiquim.Logistics.Domain.Entities.ShippingSchedulings;
+using Sumiquim.Logistics.Domain.Enum;
 using Sumiquim.Logistics.Domain.Exceptions;
 using Sumiquim.Logistics.Infrastructure.Office.ShippingSchedulingExcelReader;
 
@@ -28,7 +29,14 @@ public class CreateShippingSchedulingFromExcelCommandHandler(
             throw new BusinessException("El archivo no contiene datos");
         }
 
-        shippingSchedulingRepository.Add(shippings, cancellationToken);
+        foreach (var item in shippings)
+        {
+            item.Date = command.Date;
+            item.SchedulingNotification = ShippingStatus.Pending.Value;
+            item.ShipmentNotification = ShippingStatus.Pending.Value;
+        }
+
+        shippingSchedulingRepository.AddRange(shippings, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return new CreateShippingSchedulingResponse(true);

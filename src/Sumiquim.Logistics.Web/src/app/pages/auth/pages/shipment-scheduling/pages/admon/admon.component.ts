@@ -70,8 +70,8 @@ export class AdmonComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
       .pipe(takeUntil(this.subscriptions))
       .subscribe(result => {
-        this.getShippings();
         this.sendScheduledNotificationEmail();
+        this.getShippings();
       })
   }
 

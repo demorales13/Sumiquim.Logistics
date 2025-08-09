@@ -120,11 +120,12 @@ export class ShippingSchedulingService extends AppHttpServiceResponse {
       );
   }
 
-  createFromExcel(file: File): Observable<IAppHttpResponse<any> | ITrackHttpError> {
+  createFromExcel(date: number, file: File): Observable<IAppHttpResponse<any> | ITrackHttpError> {
     var url = `${environment.baseUrl}/shipping-scheduling/excel/create`;
 
     const formData: FormData = new FormData();
     formData.append('File', file, file.name);
+    formData.append('date', this.formatDate(date).toString());
 
     return this.http
       .post<IAppHttpResponse<any>>(url, formData)
