@@ -3,7 +3,9 @@ using Carter;
 using Sumiquim.Logistics.API;
 using Sumiquim.Logistics.API.Extensions;
 using Sumiquim.Logistics.Application;
+using Sumiquim.Logistics.Domain.Abstractions;
 using Sumiquim.Logistics.Infrastructure;
+using Sumiquim.Logistics.Infrastructure.Notifiers.ShippingScheduling;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,13 +50,15 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
 app.UseCors(builder =>
-    builder.AllowAnyOrigin()
+    builder.WithOrigins("http://localhost:4210")
            .AllowAnyMethod()
            .AllowAnyHeader()
+           .AllowCredentials()
 );
 
 app.UseAuthentication();
@@ -81,6 +85,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCustomExceptionHandler();
+app.MapHub<ShippingSchedulingHub>("/hubs/shipping-scheduling");
 
 
 app.Run();

@@ -8,6 +8,7 @@ using Sumiquim.Logistics.Domain.Abstractions;
 using Sumiquim.Logistics.Domain.Entities.ShippingSchedulings;
 using Sumiquim.Logistics.Infrastructure.Authentication;
 using Sumiquim.Logistics.Infrastructure.DbContext;
+using Sumiquim.Logistics.Infrastructure.Notifiers.ShippingScheduling;
 using Sumiquim.Logistics.Infrastructure.Office.ShippingSchedulingExcelReader;
 using Sumiquim.Logistics.Infrastructure.Repositories;
 
@@ -21,6 +22,7 @@ public static class DependencyInjection
     {
         services.AddTransient<IEmailService, EmailService>();
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+        services.AddScoped<IShippingSchedulingNotifier, ShippingSchedulingNotifier>();
 
         AddPersistence(services, configuration);
 
