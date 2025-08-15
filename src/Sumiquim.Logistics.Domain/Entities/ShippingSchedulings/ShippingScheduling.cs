@@ -38,5 +38,5 @@ public class ShippingScheduling
 
     public string? Location { get; set; }
 
-    public string? Incident { get; set; }
+    public DateTime CreatedAt { get; set; }
 }

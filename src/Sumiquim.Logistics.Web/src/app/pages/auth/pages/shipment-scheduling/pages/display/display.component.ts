@@ -14,7 +14,6 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class DisplayComponent implements OnInit, OnDestroy {
 
-  shippingLines!: IShippingScheduling[];
   today!: number;
   subscriptions = new Subject();
 
@@ -35,6 +34,10 @@ export class DisplayComponent implements OnInit, OnDestroy {
     this.subscribeToNotifications();
   }
 
+  get ShippingLines(): IShippingScheduling[] {
+    return this.shippingSchedulingService.ShippingLines;
+  }
+
   subscribeToNotifications(): void {
     this.shippingSchedulingNotifierService.shippingUpdated$.subscribe(() => {
       this.getShippings(this.today);
@@ -46,7 +49,6 @@ export class DisplayComponent implements OnInit, OnDestroy {
     this.shippingSchedulingService.getByDate(date)
       .pipe(takeUntil(this.subscriptions))
       .subscribe(res => {
-        this.shippingLines = res as IShippingScheduling[];
       }, error => {
         console.log("Error => ", error);
         this.notificationService.toast('Se produjo un error. Intente nuevamente.', 'error');
@@ -68,6 +70,10 @@ export class DisplayComponent implements OnInit, OnDestroy {
 
   onDateChanged(event: Value): void {
     this.getShippings(event as number);
+  }
+
+  trackById(_: number, item: IShippingScheduling) {
+    return item.shippingSchedulingId;
   }
 
 }

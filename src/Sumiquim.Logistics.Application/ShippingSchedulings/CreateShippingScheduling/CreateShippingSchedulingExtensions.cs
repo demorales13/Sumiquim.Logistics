@@ -1,4 +1,6 @@
-﻿using Sumiquim.Logistics.Domain.Entities.ShippingSchedulings;
+﻿using Medo;
+
+using Sumiquim.Logistics.Domain.Entities.ShippingSchedulings;
 
 namespace Sumiquim.Logistics.Application.ShippingSchedulings.CreateShippingScheduling;
 
@@ -11,7 +13,7 @@ public static class CreateShippingSchedulingExtensions
 
         return new ShippingScheduling
         {
-            ShippingSchedulingId = Guid.NewGuid(),
+            ShippingSchedulingId = Uuid7.NewUuid7(),
             Address = command.Address,
             Batch = command.Batch,
             CarrierCompany = command.CarrierCompany,
@@ -28,8 +30,7 @@ public static class CreateShippingSchedulingExtensions
             SchedulingNotification = command.SchedulingNotification,
             ShipmentNotification = command.ShipmentNotification,
             Warehouse = command.Warehouse,
-            Location = command.Location,
-            Incident = command.Incident
+            Location = command.Location
         };
     }
 }

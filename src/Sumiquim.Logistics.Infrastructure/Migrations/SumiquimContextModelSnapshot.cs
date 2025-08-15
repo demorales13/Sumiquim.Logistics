@@ -155,6 +155,11 @@ namespace Sumiquim.Logistics.Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
+
                     b.Property<int?>("Date")
                         .HasMaxLength(10)
                         .HasColumnType("int");
@@ -162,9 +167,6 @@ namespace Sumiquim.Logistics.Infrastructure.Migrations
                     b.Property<string>("Guide")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Incident")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Item")
                         .HasMaxLength(100)

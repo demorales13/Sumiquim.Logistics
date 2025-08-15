@@ -113,4 +113,8 @@ export class AdmonComponent implements OnInit, OnDestroy {
       });
   }
 
+  trackById(_: number, item: IShippingScheduling) {
+    return item.shippingSchedulingId;
+  }
+
 }

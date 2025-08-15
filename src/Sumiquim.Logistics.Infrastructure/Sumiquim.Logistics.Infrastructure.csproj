@@ -24,8 +24,4 @@
     <ProjectReference Include="..\Sumiquim.Logistics.Domain\Sumiquim.Logistics.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

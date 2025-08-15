@@ -64,7 +64,7 @@ export class ShippingSchedulingService extends AppHttpServiceResponse {
         map(
           (response) => response.data ?? []
         ),
-        tap((list) => (this._pendingShippingLines = list)),
+        tap((list) => (this.mergePendingShippingScheduling(list))),
         catchError((error) => this.handleHttpError(error))
       );
   }
@@ -85,7 +85,7 @@ export class ShippingSchedulingService extends AppHttpServiceResponse {
         map(
           (response) => response.data ?? []
         ),
-        tap((list) => (this._shippingLines = list)),
+        tap((list) => (this.mergeShippingScheduling(list))),
         catchError((error) => this.handleHttpError(error))
       );
   }
@@ -142,6 +142,48 @@ export class ShippingSchedulingService extends AppHttpServiceResponse {
     if (day.length < 2) day = "0" + day;
 
     return +[year, month, day].join("");
+  }
+
+  private mergeShippingScheduling(newList: IShippingScheduling[]): void {
+    const map = new Map(newList.map(n => [n.shippingSchedulingId, n]));
+
+    // 1) Borrar los que ya no vienen
+    for (let i = this._shippingLines.length - 1; i >= 0; i--) {
+      if (!map.has(this._shippingLines[i].shippingSchedulingId)) {
+        this._shippingLines.splice(i, 1);
+      }
+    }
+
+    // 2) Actualizar / insertar
+    newList.forEach((n, idx) => {
+      const old = this._shippingLines.find(o => o.shippingSchedulingId === n.shippingSchedulingId);
+      if (old) {
+        Object.assign(old, n);
+      } else {
+        this._shippingLines.splice(idx, 0, n);
+      }
+    });
+  }
+
+  private mergePendingShippingScheduling(newList: IShippingScheduling[]): void {
+    const map = new Map(newList.map(n => [n.shippingSchedulingId, n]));
+
+    // 1) Borrar los que ya no vienen
+    for (let i = this._pendingShippingLines.length - 1; i >= 0; i--) {
+      if (!map.has(this._pendingShippingLines[i].shippingSchedulingId)) {
+        this._pendingShippingLines.splice(i, 1);
+      }
+    }
+
+    // 2) Actualizar / insertar
+    newList.forEach((n, idx) => {
+      const old = this._pendingShippingLines.find(o => o.shippingSchedulingId === n.shippingSchedulingId);
+      if (old) {
+        Object.assign(old, n);
+      } else {
+        this._pendingShippingLines.splice(idx, 0, n);
+      }
+    });
   }
 
 }

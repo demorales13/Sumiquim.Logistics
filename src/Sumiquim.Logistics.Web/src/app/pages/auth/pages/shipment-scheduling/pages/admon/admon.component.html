@@ -13,7 +13,8 @@
       let line of ShippingLines
         | multiFieldOrderBy
           : ['carrierCompany', 'client', 'item', 'location']
-          : true
+          : true;
+      trackBy: trackById
     "
   >
     <app-shipping-line-admon

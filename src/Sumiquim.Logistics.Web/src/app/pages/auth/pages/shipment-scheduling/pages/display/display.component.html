@@ -3,7 +3,15 @@
 </div>
 
 <div class="body">
-  <ng-container *ngFor="let line of shippingLines | multiFieldOrderBy: ['carrierCompany', 'client', 'item', 'location']: true">
+  <ng-container
+    *ngFor="
+      let line of ShippingLines
+        | multiFieldOrderBy
+          : ['carrierCompany', 'client', 'item', 'location']
+          : true;
+      trackBy: trackById
+    "
+  >
     <app-shipping-line [shippingLine]="line"></app-shipping-line>
   </ng-container>
 </div>

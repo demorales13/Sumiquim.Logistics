@@ -52,7 +52,7 @@ namespace Sumiquim.Logistics.Infrastructure.Migrations
                     ShipmentNotification = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     Warehouse = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     Location = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    Incident = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()")
                 },
                 constraints: table =>
                 {

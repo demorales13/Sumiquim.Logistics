@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using Sumiquim.Logistics.Domain.Entities.ShippingSchedulings;
@@ -58,5 +59,10 @@ internal sealed class ShippingSchedulingConfiguration : IEntityTypeConfiguration
 
         builder.Property(x => x.Location)
             .HasMaxLength(10);
+
+        builder.Property(x => x.CreatedAt)
+            .HasDefaultValueSql("GETUTCDATE()")
+            .ValueGeneratedOnAdd()
+             .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
     }
 }

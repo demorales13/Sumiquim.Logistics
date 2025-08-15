@@ -1,5 +1,3 @@
-import { IClient, ICourierCompany, IItem } from "..";
-
 export interface IShippingScheduling {
   shippingSchedulingId: string;
   date: number;
