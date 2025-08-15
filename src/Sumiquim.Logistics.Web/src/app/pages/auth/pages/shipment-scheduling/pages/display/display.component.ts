@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IShippingScheduling } from '@app/models/backend';
-import { LoaderService } from '@app/services/loader.service';
 import { NotificationService } from '@app/services/notification.service';
+import { ShippingSchedulingNotifierService } from '@app/services/shipping-scheduling-notifier.service';
 import { ShippingSchedulingService } from '@app/services/shipping-scheduling.service';
 import { Value } from '@app/shared/controls/date/date.component';
 import { Subject } from 'rxjs';
@@ -20,8 +20,9 @@ export class DisplayComponent implements OnInit, OnDestroy {
 
   constructor(
     private shippingSchedulingService: ShippingSchedulingService,
-    private loaderService: LoaderService,
-    private notificationService: NotificationService,) { }
+    private notificationService: NotificationService,
+    private shippingSchedulingNotifierService: ShippingSchedulingNotifierService
+  ) { }
 
   ngOnDestroy(): void {
     this.subscriptions.next(null);
@@ -31,6 +32,15 @@ export class DisplayComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.today = new Date().getTime();
     this.getShippings(this.today);
+    this.subscribeToNotifications();
+  }
+
+  subscribeToNotifications(): void {
+    this.shippingSchedulingNotifierService.shippingUpdated$.subscribe(() => {
+      console.log('¡Se recibió actualización de ShippingScheduling!');
+      this.getShippings(this.today);
+      this.notificationService.toast('Actualización de datos.', 'info');
+    });
   }
 
   getShippings(date: number) {
@@ -38,10 +48,8 @@ export class DisplayComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.subscriptions))
       .subscribe(res => {
         this.shippingLines = res as IShippingScheduling[];
-        this.loaderService.hide();
       }, error => {
         console.log("Error => ", error);
-        this.loaderService.hide();
         this.notificationService.toast('Se produjo un error. Intente nuevamente.', 'error');
       });
   }

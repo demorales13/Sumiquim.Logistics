@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { IShippingScheduling } from '@app/models/backend';
-import { LoaderService } from '@app/services/loader.service';
 import { NotificationService } from '@app/services/notification.service';
 import { ShippingSchedulingService } from '@app/services/shipping-scheduling.service';
 import { Value } from '@app/shared/controls/date/date.component';
@@ -10,6 +9,7 @@ import { takeUntil } from 'rxjs/operators';
 import { FormComponent } from '../../components/form/form.component';
 import { ExcelFormComponent } from '../../components/excel-form/excel-form.component';
 import { EmailService } from '@app/services/email.service';
+import { ShippingSchedulingNotifierService } from '@app/services/shipping-scheduling-notifier.service';
 
 @Component({
   selector: 'app-admon',
@@ -22,9 +22,9 @@ export class AdmonComponent implements OnInit, OnDestroy {
   subscriptions = new Subject();
 
   constructor(private dialog: MatDialog,
-    private loaderService: LoaderService,
     private notificationService: NotificationService,
     private emailService: EmailService,
+    private shippingSchedulingNotifierService: ShippingSchedulingNotifierService,
     private shippingSchedulingService: ShippingSchedulingService) { }
 
   ngOnDestroy(): void {
@@ -39,17 +39,23 @@ export class AdmonComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.date = new Date().getTime();
     this.getShippings();
+    this.subscribeToNotifications();
+  }
+
+  subscribeToNotifications(): void {
+    this.shippingSchedulingNotifierService.shippingUpdated$.subscribe(() => {
+      console.log('¡Se recibió actualización de ShippingScheduling!');
+      this.getShippings();
+      this.notificationService.toast('Actualización de datos.', 'info');
+    });
   }
 
   getShippings() {
-    this.loaderService.show();
     this.shippingSchedulingService.getByDate(this.date)
       .pipe(takeUntil(this.subscriptions))
       .subscribe(res => {
-        this.loaderService.hide();
       }, error => {
         console.log("Error => ", error);
-        this.loaderService.hide();
         this.notificationService.toast('Se produjo un error. Intente nuevamente.', 'error');
       });
   }

@@ -9,17 +9,6 @@ const routes: Routes = [
     component: AuthComponent,
     children: [
       {
-        path: 'admon',
-        loadChildren: () => import('./pages/admon/admon.module').then(m => m.AdmonModule),
-        canActivate: [NgxPermissionsGuard],
-        data: {
-          permissions: {
-            only: ['Logistics'],
-            redirectTo: '/auth'
-          }
-        }
-      },
-      {
         path: 'shipment-scheduling',
         loadChildren: () => import('./pages/shipment-scheduling/shipping-scheduling.module').then(m => m.ShippingSchedulingModule)
       },

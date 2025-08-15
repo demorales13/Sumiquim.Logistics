@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { ROLES } from '@app/data/roles.const';
 import { IUser } from '@app/models/backend';
 import { AuthService } from '@app/services/auth.service';
-import { LoaderService } from '@app/services/loader.service';
 import { NotificationService } from '@app/services/notification.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -21,7 +20,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder,
     private route: Router,
-    private loaderService: LoaderService,
     private notificationService: NotificationService,
     private authService: AuthService) { }
 
@@ -54,16 +52,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   login() {
     const credentials = this.form.value;
 
-    this.loaderService.show();
-
     this.authService.login(credentials)
       .pipe(takeUntil(this.subscriptions))
       .subscribe({
         next: (response) => {
-          this.loaderService.hide();
-
           const user = response.data as IUser;
-
           if (user.role === ROLES.PLANNER) {
             this.route.navigate(['/auth/shipment-scheduling/admon']);
           } else {
@@ -72,7 +65,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         },
         error: (error) => {
           console.error("Error => ", error);
-          this.loaderService.hide();
           this.notificationService.toast('Se produjo un error. Intente nuevamente.', 'error');
         }
       });

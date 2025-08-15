@@ -7,6 +7,7 @@ import { ShippingSchedulingService } from '@app/services/shipping-scheduling.ser
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FormComponent } from '../../components/form/form.component';
+import { ShippingSchedulingNotifierService } from '@app/services/shipping-scheduling-notifier.service';
 
 @Component({
   selector: 'app-admon',
@@ -19,9 +20,11 @@ export class AdmonComponent implements OnInit, OnDestroy {
   subscriptions = new Subject();
 
   constructor(private dialog: MatDialog,
-    private loaderService: LoaderService,
     private notificationService: NotificationService,
-    private shippingSchedulingService: ShippingSchedulingService) { }
+    private shippingSchedulingNotifierService: ShippingSchedulingNotifierService,
+    private shippingSchedulingService: ShippingSchedulingService) {
+
+  }
 
   ngOnDestroy(): void {
     this.subscriptions.next(null);
@@ -34,19 +37,24 @@ export class AdmonComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.date = new Date().getTime();
+    this.subscribeToNotifications();
     this.getShippings();
   }
 
-  getShippings() {
-    this.loaderService.show();
+  subscribeToNotifications(): void {
+    this.shippingSchedulingNotifierService.shippingUpdated$.subscribe(() => {
+      console.log('¡Se recibió actualización de ShippingScheduling!');
+      this.getShippings();
+      this.notificationService.toast('Actualización de datos.', 'info');
+    });
+  }
 
+  getShippings() {
     this.shippingSchedulingService.getPendingShippingLines()
       .pipe(takeUntil(this.subscriptions))
       .subscribe(res => {
-        this.loaderService.hide();
       }, error => {
         console.log("Error => ", error);
-        this.loaderService.hide();
         this.notificationService.toast('Se produjo un error. Intente nuevamente.', 'error');
       });
   }

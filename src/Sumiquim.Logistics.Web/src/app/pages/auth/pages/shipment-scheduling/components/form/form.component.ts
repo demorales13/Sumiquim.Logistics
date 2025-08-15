@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IShippingScheduling } from '@app/models/backend';
 import { ControlItem } from '@app/models/frontend';
-import { LoaderService } from '@app/services/loader.service';
 import { NotificationService } from '@app/services/notification.service';
 import { ShippingSchedulingService } from '@app/services/shipping-scheduling.service';
 import { markFormGroupTouched } from '@app/shared/utils';
@@ -26,7 +25,6 @@ export class FormComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<FormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: IShippingScheduling,
-    private loaderService: LoaderService,
     private notificationService: NotificationService,
     private shippingSchedulingService: ShippingSchedulingService) { }
 
@@ -175,16 +173,12 @@ export class FormComponent implements OnInit, OnDestroy {
 
     var shipping: IShippingScheduling = { ...res };
 
-    console.log("FORM => ", shipping);
-    this.loaderService.show();
     this.shippingSchedulingService.Update(shipping)
       .pipe(takeUntil(this.subscriptions))
       .subscribe(res => {
-        this.loaderService.hide();
         this.dialogRef.close(res);
       }, error => {
         console.log("Error => ", error);
-        this.loaderService.hide();
         this.notificationService.toast('Se produjo un error. Intente nuevamente.', 'error');
       });
   }

@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angula
 import { FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IShippingScheduling } from '@app/models/backend';
-import { LoaderService } from '@app/services/loader.service';
 import { NotificationService } from '@app/services/notification.service';
 import { ShippingSchedulingService } from '@app/services/shipping-scheduling.service';
 import { Subject } from 'rxjs';
@@ -23,7 +22,6 @@ export class ExcelFormComponent implements OnInit, OnDestroy {
   constructor(private dialogRef: MatDialogRef<ExcelFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: IShippingScheduling,
     private shippingSchedulingService: ShippingSchedulingService,
-    private loaderService: LoaderService,
     private notificationService: NotificationService,
     private cdr: ChangeDetectorRef) {
     this.form = new FormGroup({});
@@ -45,18 +43,15 @@ export class ExcelFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.loaderService.show();
     this.shippingSchedulingService.createFromExcel(this.data.date, this.excelFiles as File)
       .subscribe(
         () => {
           this.notificationService.toast("La creación de despachos finalizó exitosamente", "success");
-          this.loaderService.hide();
           this.onClose();
         },
         (response) => {
           console.error(response);
           this.errors = response.errors.errors || [];
-          this.loaderService.hide();
         }
       );
 

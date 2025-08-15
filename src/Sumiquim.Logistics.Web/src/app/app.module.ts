@@ -17,6 +17,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { AppConfigService } from './services/app-config.service';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
 
 const APP_DATE_FORMAT: MatDateFormats = {
   parse: {
@@ -75,6 +76,11 @@ export function servicesOnRun(config: AppConfigService) {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
       multi: true,
     },
     AppConfigService,

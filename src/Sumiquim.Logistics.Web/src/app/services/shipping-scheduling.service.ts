@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { IAppHttpResponse, IShippingScheduling, ITrackHttpError, IUser, ShippingStatuses } from '@app/models/backend';
 import { Observable } from 'rxjs';
-import { catchError, map, take, tap } from 'rxjs/operators';
-import { NotificationService } from './notification.service';
-import { EmailService } from './email.service';
+import { catchError, map, tap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
-import { LoaderService } from './loader.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AppHttpServiceResponse } from '@app/classes/AppHttpServiceResponse.class';
 import { environment } from '@src/environments/environment';
@@ -26,6 +22,10 @@ export class ShippingSchedulingService extends AppHttpServiceResponse {
     private authService: AuthService
   ) {
     super(http)
+    this.subscribeToProfile();
+  }
+
+  private subscribeToProfile(): void {
     this.authService.profile$.subscribe(
       (profile) => (this.profile = profile)
     );
