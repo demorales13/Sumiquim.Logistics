@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IShippingScheduling } from '@app/models/backend';
@@ -22,8 +22,7 @@ export class ExcelFormComponent implements OnInit, OnDestroy {
   constructor(private dialogRef: MatDialogRef<ExcelFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: IShippingScheduling,
     private shippingSchedulingService: ShippingSchedulingService,
-    private notificationService: NotificationService,
-    private cdr: ChangeDetectorRef) {
+    private notificationService: NotificationService) {
     this.form = new FormGroup({});
   }
 

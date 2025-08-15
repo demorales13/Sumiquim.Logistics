@@ -37,9 +37,8 @@ export class DisplayComponent implements OnInit, OnDestroy {
 
   subscribeToNotifications(): void {
     this.shippingSchedulingNotifierService.shippingUpdated$.subscribe(() => {
-      console.log('¡Se recibió actualización de ShippingScheduling!');
       this.getShippings(this.today);
-      this.notificationService.toast('Actualización de datos.', 'info');
+      this.notificationService.toast('Datos sincronizados.', 'info');
     });
   }
 

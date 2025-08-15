@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { IShippingScheduling, ShippingStatuses } from '@app/models/backend';
-import { LoaderService } from '@app/services/loader.service';
+import { IShippingScheduling } from '@app/models/backend';
 import { NotificationService } from '@app/services/notification.service';
 import { ShippingSchedulingService } from '@app/services/shipping-scheduling.service';
 import { Subject } from 'rxjs';
@@ -43,9 +42,8 @@ export class AdmonComponent implements OnInit, OnDestroy {
 
   subscribeToNotifications(): void {
     this.shippingSchedulingNotifierService.shippingUpdated$.subscribe(() => {
-      console.log('¡Se recibió actualización de ShippingScheduling!');
       this.getShippings();
-      this.notificationService.toast('Actualización de datos.', 'info');
+      this.notificationService.toast('Datos sincronizados.', 'info');
     });
   }
 

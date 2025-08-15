@@ -32,7 +32,7 @@ public class CreateShippingSchedulingFromExcelCommandHandler(
         foreach (var item in shippings)
         {
             item.Date = command.Date;
-            item.SchedulingNotification = ShippingStatus.Pending.Value;
+            item.SchedulingNotification = ShippingStatus.Sent.Value;
             item.ShipmentNotification = ShippingStatus.Pending.Value;
         }
 

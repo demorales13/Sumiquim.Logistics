@@ -2,6 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 
+using Sumiquim.Logistics.Domain.Abstractions;
 using Sumiquim.Logistics.Domain.Entities.ShippingSchedulings;
 using Sumiquim.Logistics.Domain.Enum;
 using Sumiquim.Logistics.Infrastructure.DbContext;
@@ -10,8 +11,11 @@ namespace Sumiquim.Logistics.Infrastructure.Repositories;
 
 public class ShippingSchedulingCommandRepository : Repository<ShippingScheduling>, IShippingSchedulingCommandRepository
 {
-    public ShippingSchedulingCommandRepository(SumiquimContext dbContext) : base(dbContext)
+    private readonly IShippingSchedulingNotifier _notifier;
+
+    public ShippingSchedulingCommandRepository(SumiquimContext dbContext, IShippingSchedulingNotifier notifier) : base(dbContext)
     {
+        _notifier = notifier;
     }
 
     public async Task MarkSchedulingNotificationAsSentAsync(IEnumerable<Guid> shippingIds, CancellationToken cancellationToken)
@@ -44,5 +48,6 @@ public class ShippingSchedulingCommandRepository : Repository<ShippingScheduling
                 ),
                 cancellationToken
             );
+        await _notifier.NotifyUpdatedAsync();
     }
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { LoaderService } from '@app/services/loader.service';
 import { NotificationService } from '@app/services/notification.service';
 import { Subject } from 'rxjs';
@@ -16,8 +15,7 @@ export class AdmonComponent implements OnInit {
   subscriptions = new Subject();
   pendingOrderLines!: IPendingOrder[];
 
-  constructor(private dialog: MatDialog,
-    private loaderService: LoaderService,
+  constructor(private loaderService: LoaderService,
     private pendingOrderService: PendingOrderService,
     private notificationService: NotificationService) { }
 

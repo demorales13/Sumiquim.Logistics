@@ -44,9 +44,8 @@ export class AdmonComponent implements OnInit, OnDestroy {
 
   subscribeToNotifications(): void {
     this.shippingSchedulingNotifierService.shippingUpdated$.subscribe(() => {
-      console.log('¡Se recibió actualización de ShippingScheduling!');
       this.getShippings();
-      this.notificationService.toast('Actualización de datos.', 'info');
+      this.notificationService.toast('Datos sincronizados.', 'info');
     });
   }
 
@@ -76,17 +75,7 @@ export class AdmonComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
       .pipe(takeUntil(this.subscriptions))
       .subscribe(result => {
-        this.sendScheduledNotificationEmail();
-        this.getShippings();
       })
-  }
-
-  sendScheduledNotificationEmail(): void {
-    this.emailService.sendScheduledNotificationEmail()
-      .pipe(takeUntil(this.subscriptions))
-      .subscribe(result => {
-        console.log("SendScheduledNotificationEmail => ", result);
-      });
   }
 
   onShippingEditClick(shipping: IShippingScheduling): void {
@@ -98,7 +87,6 @@ export class AdmonComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
       .pipe(takeUntil(this.subscriptions))
       .subscribe(result => {
-        this.getShippings();
       })
   }
 
@@ -109,7 +97,6 @@ export class AdmonComponent implements OnInit, OnDestroy {
           this.shippingSchedulingService.remove(shipping)
             .pipe(takeUntil(this.subscriptions))
             .subscribe(res => {
-
             }, error => {
               console.log("Error => ", error);
               this.notificationService.toast('Se produjo un error. Intente nuevamente.', 'error');
@@ -119,12 +106,6 @@ export class AdmonComponent implements OnInit, OnDestroy {
   }
 
   onCheckEmails(): void {
-    this.emailService.sendScheduledNotificationEmail()
-      .pipe(takeUntil(this.subscriptions))
-      .subscribe(result => {
-        console.log("SendScheduledNotificationEmail => ", result);
-      });
-
     this.emailService.sendShipmentNotificationEmail()
       .pipe(takeUntil(this.subscriptions))
       .subscribe(result => {
