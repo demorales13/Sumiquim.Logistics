@@ -39,6 +39,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Sumiquim.Logistics.Web", "s
 		SlnRelativePath = "src\Sumiquim.Logistics.Web\"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sumiquim.Logistics.Utilities.Migration", "src\Sumiquim.Logistics.Utilities.Migration\Sumiquim.Logistics.Utilities.Migration.csproj", "{EC9A8488-6A6C-42EF-B8FF-6777B2A5D114}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{BDAEF7CC-5062-C1E1-F920-10CA68A477D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDAEF7CC-5062-C1E1-F920-10CA68A477D3}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{BDAEF7CC-5062-C1E1-F920-10CA68A477D3}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{EC9A8488-6A6C-42EF-B8FF-6777B2A5D114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC9A8488-6A6C-42EF-B8FF-6777B2A5D114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC9A8488-6A6C-42EF-B8FF-6777B2A5D114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC9A8488-6A6C-42EF-B8FF-6777B2A5D114}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{4FF4480B-8C85-FBCB-4970-E90468A5950A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{10E3CF92-E8DB-41F9-AEE0-DEE358E6E258} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{BDAEF7CC-5062-C1E1-F920-10CA68A477D3} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{EC9A8488-6A6C-42EF-B8FF-6777B2A5D114} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2DC08996-FD90-4AFD-8F80-C1E23BA5A54C}
